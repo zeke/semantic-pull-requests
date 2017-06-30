@@ -1,0 +1,27 @@
+{
+  "name": "wip-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "probot run",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gr2m/wip-bot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gr2m/wip-bot/issues"
+  },
+  "homepage": "https://github.com/gr2m/wip-bot#readme",
+  "dependencies": {
+    "probot": "^0.7.4"
+  },
+  "devDependencies": {
+    "localtunnel": "^1.8.3"
+  }
+}
