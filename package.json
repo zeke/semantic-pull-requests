@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "probot run",
+    "start": "probot run ./index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
