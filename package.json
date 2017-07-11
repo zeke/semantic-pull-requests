@@ -11,8 +11,11 @@
     "type": "git",
     "url": "https://github.com/gr2m/wip-bot.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "probot",
+    "probot-plugin"
+  ],
+  "author": "Gregor Martynus (https://github.com/gr2m)",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/gr2m/wip-bot/issues"
