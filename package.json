@@ -1,11 +1,14 @@
 {
   "name": "wip-bot",
-  "version": "1.0.0",
+  "version": "0.0.0-development",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "deploy": "scripts/deploy.sh",
     "start": "probot run ./index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "now-start": "PRIVATE_KEY=$(echo $PRIVATE_KEY | base64 -d) npm start",
+    "test": "standard",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
     "type": "git",
@@ -22,12 +25,23 @@
   },
   "homepage": "https://github.com/gr2m/wip-bot#readme",
   "dependencies": {
-    "probot": "^0.7.4"
+    "probot": "^0.7.4",
+    "standard": "^10.0.3"
   },
   "devDependencies": {
-    "localtunnel": "^1.8.3"
+    "localtunnel": "^1.8.3",
+    "semantic-release": "^7.0.2"
   },
   "engines": {
-    "node": "6.11.0"
+    "node": "8"
+  },
+  "now": {
+    "alias": "wip-bot",
+    "env": {
+      "APP_ID": "@wip-bot-app-id",
+      "NODE_ENV": "production",
+      "PRIVATE_KEY": "@wip-bot-private-key",
+      "WEBHOOK_SECRET": "@wip-bot-webhook-secret"
+    }
   }
 }
