@@ -1,0 +1,21 @@
+language: node_js
+cache:
+  directories:
+    - $HOME/.npm
+notifications:
+  email: false
+node_js:
+  - 8
+before_script:
+  - npm prune
+after_success:
+  - npm run semantic-release
+branches:
+  except:
+    - /^v\d+\.\d+\.\d+$/
+deploy:
+  script: scripts/deploy.sh
+  provider: script
+  skip_cleanup: true
+  on:
+    branch: master
