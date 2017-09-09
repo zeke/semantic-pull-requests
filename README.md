@@ -1,5 +1,7 @@
 # wip-bot
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/gr2m/wip-bot.svg)](https://greenkeeper.io/)
+
 > DO NOT MERGE – as a service.
 
 ## Local setup
