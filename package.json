@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/gr2m/wip-bot#readme",
   "dependencies": {
-    "probot": "^3.0.0"
+    "probot": "^4.0.0"
   },
   "devDependencies": {
     "localtunnel": "^1.8.3",
