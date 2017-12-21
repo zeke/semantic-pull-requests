@@ -8,7 +8,7 @@
     "start": "probot run ./index.js",
     "now-start": "PRIVATE_KEY=$(echo $PRIVATE_KEY | base64 -d) npm start",
     "test": "standard",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "semantic-release": "semantic-release"
   },
   "repository": {
     "type": "git",
