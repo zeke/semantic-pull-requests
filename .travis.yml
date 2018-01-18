@@ -18,16 +18,18 @@ branches:
     - master
     - /^greenkeeper.*$/
 
+stages:
+  - test
+  - name: release
+    if: branch = master AND type IN (push)
+
 jobs:
   include:
-    - script: npm run test
+    - stage: test
+      script: npm run test
     - stage: release
       node_js: lts/*
-      script:
-        - npm run semantic-release
-    - stage: deploy
-      if: branch = master
-      script: skip
+      script: npm run semantic-release
       deploy:
         script: scripts/deploy.sh
         provider: script
