@@ -26,7 +26,7 @@
 - Create your own GitHub app: [instructions](https://probot.github.io/docs/development/#configure-a-github-app)
 - Store the private key as `private-key.pem` in the repository’s directory
 - Start the app with `APP_ID=1234 npm start` where `1234` is your GitHub App’s ID
-- update your GitHub App’s `Webhook URL` to your localtunnle.me URL
+- update your GitHub App’s `Webhook URL` to your localtunnel.me URL
 
 ## License
 
