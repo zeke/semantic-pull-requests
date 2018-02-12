@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # https://github.com/zeit/now-cli/issues/817
-now="npx now --token=$NOW_TOKEN --debug"
+now="npx now --debug --token=$NOW_TOKEN"
 
 echo "$ now --public"
 $now --public
