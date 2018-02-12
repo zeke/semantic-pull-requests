@@ -3,6 +3,10 @@
   "version": "0.0.0-development",
   "description": "",
   "main": "index.js",
+  "files": [
+    "index.js",
+    "lib"
+  ],
   "scripts": {
     "deploy": "scripts/deploy.sh",
     "start": "probot run ./index.js",
