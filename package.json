@@ -11,8 +11,14 @@
     "deploy": "scripts/deploy.sh",
     "start": "probot run ./index.js",
     "now-start": "PRIVATE_KEY=$(echo $PRIVATE_KEY | base64 -d) npm start",
-    "test": "standard",
+    "test": "jest",
+    "test:watch": "jest . --watch",
+    "pretest": "npm run lint",
+    "lint": "standard",
     "semantic-release": "semantic-release"
+  },
+  "standard": {
+    "globals": [ "jest", "it", "expect", "describe" ]
   },
   "repository": {
     "type": "git",
@@ -31,7 +37,11 @@
   "dependencies": {
     "probot": "^4.0.0"
   },
+  "jest": {
+    "testRegex": "/test/unit/.+\\.test\\.js$"
+  },
   "devDependencies": {
+    "jest": "^22.3.0",
     "localtunnel": "^1.8.3",
     "semantic-release": "^12.2.2",
     "standard": "^11.0.0"
