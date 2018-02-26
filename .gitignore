@@ -1,3 +1,4 @@
+.env
 .npmrc
 node_modules
 private-key.pem
