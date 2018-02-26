@@ -18,7 +18,12 @@
     "semantic-release": "semantic-release"
   },
   "standard": {
-    "globals": [ "jest", "it", "expect", "describe" ]
+    "globals": [
+      "jest",
+      "it",
+      "expect",
+      "describe"
+    ]
   },
   "repository": {
     "type": "git",
