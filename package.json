@@ -32,7 +32,7 @@
   "author": "Zeke Sikelianos (https://github.com/zeke)",
   "license": "Apache-2.0",
   "dependencies": {
-    "probot": "^4.0.0"
+    "probot": "^5.0.1"
   },
   "jest": {
     "testRegex": "/test/unit/.+\\.test\\.js$"
