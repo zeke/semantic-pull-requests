@@ -41,6 +41,7 @@
     "jest": "^22.3.0",
     "localtunnel": "^1.8.3",
     "semantic-release": "^12.2.2",
+    "smee-client": "^1.0.1",
     "standard": "^11.0.0"
   },
   "engines": {
