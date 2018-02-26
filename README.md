@@ -8,12 +8,9 @@
 
 ## Usage
 
-- Install the app on your GitHub Repositories: [github.com/apps/wip](https://github.com/apps/wip)
-- When creating a pull request that you don’t want to be merged, simply add the
-  word "wip" or "do not merge" (not case-sensitive) somewhere in the pull request title,
-  or add a label containing "wip"
-- The WIP bot will set/update the status of the pull request depending on the
-  pull request's title or labels.
+1. Install the app on your GitHub Repositories: [github.com/apps/wip](https://github.com/apps/wip)
+2. When creating a pull request that you don’t want to be merged, you can add "wip" or "do not merge" (not case-sensitive) to either the pull request title, label or any of the commit messages
+3. The WIP bot will set/update the status to pending/success accordingly
 
 ## Local setup
 
