@@ -9,10 +9,9 @@
   ],
   "scripts": {
     "start": "probot run ./index.js",
-    "test": "jest && npm run lint",
-    "test:watch": "jest --watch --notify --notifyMode=change --coverage",
-    "pretest": "npm run lint",
-    "lint": "standard",
+    "test": "jest test.js && npm run lint",
+    "test:watch": "DEBUG=octokit:rest* jest test.js --watch --notify --notifyMode=change --coverage",
+    "lint": "standard --fix",
     "semantic-release": "semantic-release"
   },
   "standard": {
@@ -29,7 +28,8 @@
   "license": "Apache-2.0",
   "dependencies": {
     "probot": "^7.0.1",
-    "simple-commit-message": "^4.0.3"
+    "simple-commit-message": "^4.0.3",
+    "validate-commit-msg": "^2.14.0"
   },
   "devDependencies": {
     "@octokit/rest": "^15.9.4",
