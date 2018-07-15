@@ -45,34 +45,13 @@ describe('handlePullRequestChange', () => {
       .get('/repos/sally/project-x/pulls/123/commits')
       .reply(200, commits)
 
-    const reqheaders = {
-      'accept': [
-        'application/vnd.github.v3+json'
-      ],
-      'user-agent': [
-        'octokit/rest.js v15.9.4'
-      ],
-      'content-type': [
-        'application/json; charset=utf-8'
-      ],
-      'content-length': [
-        '165'
-      ],
-      'accept-encoding': [
-        'gzip,deflate'
-      ],
-      'connection': [
-        'close'
-      ]
-    }
-
     const body = {
       state: 'pending',
       target_url: 'https://github.com/probot/semantic-pull-requests',
       description: 'add semantic commit or PR title',
       context: 'Semantic Pull Request'
     }
-    const outgoing = nock('https://api.github.com', {reqheaders})
+    const outgoing = nock('https://api.github.com')
       .post('/repos/sally/project-x/statuses/abcdefg', body)
       .reply(200)
 
