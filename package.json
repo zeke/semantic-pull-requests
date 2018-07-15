@@ -1,7 +1,7 @@
 {
   "name": "semantic-pull-requests",
   "version": "0.0.0-development",
-  "description": "Status check that ensures your pull requests have semantic titles",
+  "description": "GitHub status check that ensures your pull requests follow the Conventional Commits spec",
   "main": "index.js",
   "files": [
     "index.js",
@@ -27,17 +27,15 @@
   "author": "Zeke Sikelianos (https://github.com/zeke)",
   "license": "Apache-2.0",
   "dependencies": {
+    "conventional-commit-types": "^2.2.0",
+    "parse-commit-message": "^1.1.2",
     "probot": "^7.0.1",
-    "simple-commit-message": "^4.0.3",
-    "validate-commit-msg": "^2.14.0"
   },
   "devDependencies": {
     "@octokit/rest": "^15.9.4",
     "jest": "^23.4.0",
-    "localtunnel": "^1.8.3",
     "nock": "^9.4.2",
     "semantic-release": "^12.2.2",
-    "smee-client": "^1.0.1",
     "standard": "^11.0.0"
   },
   "engines": {
