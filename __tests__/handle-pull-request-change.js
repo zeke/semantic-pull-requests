@@ -41,22 +41,19 @@ describe('handlePullRequestChange', () => {
       {commit: {message: 'fix something'}},
       {commit: {message: 'fix something else'}}
     ]
-    const incoming = nock('https://api.github.com')
-      .get('/repos/sally/project-x/pulls/123/commits')
-      .reply(200, commits)
-
-    const body = {
+    const expectedBody = {
       state: 'pending',
       target_url: 'https://github.com/probot/semantic-pull-requests',
       description: 'add semantic commit or PR title',
       context: 'Semantic Pull Request'
     }
-    const outgoing = nock('https://api.github.com')
-      .post('/repos/sally/project-x/statuses/abcdefg', body)
+    const mock = nock('https://api.github.com')
+      .get('/repos/sally/project-x/pulls/123/commits')
+      .reply(200, commits)
+      .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
       .reply(200)
 
     await handlePullRequestChange(context())
-    expect(incoming.isDone()).toBe(true)
-    expect(outgoing.isDone()).toBe(true)
+    expect(mock.isDone()).toBe(true)
   })
 })
