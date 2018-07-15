@@ -9,8 +9,8 @@
   ],
   "scripts": {
     "start": "probot run ./index.js",
-    "test": "jest test.js && npm run lint",
-    "test:watch": "DEBUG=octokit:rest* jest test.js --watch --notify --notifyMode=change --coverage",
+    "test": "jest test/* && npm run lint",
+    "test:watch": "DEBUG=octokitz:rest* jest test/* --watch --notify --notifyMode=change --coverage",
     "lint": "standard --fix",
     "semantic-release": "semantic-release"
   },
@@ -29,7 +29,7 @@
   "dependencies": {
     "conventional-commit-types": "^2.2.0",
     "parse-commit-message": "^1.1.2",
-    "probot": "^7.0.1",
+    "probot": "^7.0.1"
   },
   "devDependencies": {
     "@octokit/rest": "^15.9.4",

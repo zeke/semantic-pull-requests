@@ -1,4 +1,4 @@
-const handlePullRequestChange = require('./lib/handle-pull-request-change')
+const handlePullRequestChange = require('../lib/handle-pull-request-change')
 const nock = require('nock')
 const github = require('@octokit/rest')()
 
@@ -18,7 +18,6 @@ function context (overrides) {
       pull_request: {
         number: 123,
         title: 'do a thing',
-        html_url: 'https://github.com/some/project/pull/123',
         head: {
           sha: 'abcdefg'
         }
@@ -45,7 +44,6 @@ describe('handlePullRequestChange', () => {
     const incoming = nock('https://api.github.com')
       .get('/repos/sally/project-x/pulls/123/commits')
       .reply(200, commits)
-
 
     const reqheaders = {
       'accept': [
@@ -74,7 +72,7 @@ describe('handlePullRequestChange', () => {
       description: 'add semantic commit or PR title',
       context: 'Semantic Pull Request'
     }
-    const outgoing = nock('https://api.github.com', reqheaders)
+    const outgoing = nock('https://api.github.com', {reqheaders})
       .post('/repos/sally/project-x/statuses/abcdefg', body)
       .reply(200)
 
