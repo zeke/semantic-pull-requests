@@ -1,27 +1,22 @@
 {
   "name": "semantic-pull-requests",
   "version": "0.0.0-development",
-  "description": "Status check that ensures your pull requests have semantic titles",
+  "description": "GitHub status check that ensures your pull requests follow the Conventional Commits spec",
   "main": "index.js",
   "files": [
     "index.js",
     "lib"
   ],
   "scripts": {
-    "deploy": "scripts/deploy.sh",
     "start": "probot run ./index.js",
-    "test": "jest",
-    "test:watch": "jest . --watch",
-    "pretest": "npm run lint",
-    "lint": "standard",
+    "test": "jest test/* && npm run lint",
+    "test:watch": "DEBUG=octokitz:rest* jest test/* --watch --notify --notifyMode=change --coverage",
+    "lint": "standard --fix",
     "semantic-release": "semantic-release"
   },
   "standard": {
-    "globals": [
-      "jest",
-      "it",
-      "expect",
-      "describe"
+    "env": [
+      "jest"
     ]
   },
   "repository": "https://github.com/probot/semantic-pull-requests",
@@ -32,17 +27,15 @@
   "author": "Zeke Sikelianos (https://github.com/zeke)",
   "license": "Apache-2.0",
   "dependencies": {
-    "probot": "^5.0.1",
-    "simple-commit-message": "^4.0.3"
-  },
-  "jest": {
-    "testRegex": "/test/unit/.+\\.test\\.js$"
+    "conventional-commit-types": "^2.2.0",
+    "parse-commit-message": "^1.1.2",
+    "probot": "^7.0.1"
   },
   "devDependencies": {
-    "jest": "^22.3.0",
-    "localtunnel": "^1.8.3",
+    "@octokit/rest": "^15.9.4",
+    "jest": "^23.4.0",
+    "nock": "^9.4.2",
     "semantic-release": "^12.2.2",
-    "smee-client": "^1.0.1",
     "standard": "^11.0.0"
   },
   "engines": {
