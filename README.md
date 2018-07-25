@@ -9,8 +9,15 @@ on your repos to ensure your pull requests are semantic before you merge them.
 
 ## How it works
 
-Take this PR for example. None of the commit messages are semantic, nor is the PR title, so the status remains yellow:
+Scenario | Status | Status Check Message
+-------- | ------ | -------
+PR title is [semantic][conventional commit type] | 💚 | `ready to be squashed`
+any commit is semantic | 💚 | `ready to be merged or rebased`
+nothing is semantic | 💛 | `add a semantic commit or PR title`
 
+## Example Scenario
+
+Take this PR for example. None of the commit messages are semantic, nor is the PR title, so the status remains yellow:
 
 <img width="580" alt="screen shot 2018-07-14 at 6 22 58 pm" src="https://user-images.githubusercontent.com/2289/42729630-11370698-8793-11e8-922c-db2308e0e98e.png">
 
@@ -19,7 +26,7 @@ Take this PR for example. None of the commit messages are semantic, nor is the P
 ---
 
 Edit the PR title by adding a semantic prefix like `fix: ` or `feat: ` or any other
-[conventional commit type](https://github.com/commitizen/conventional-commit-types/blob/master/index.json). Now use `Squash and Merge` to squash the branch onto master and write a standardized commit message while doing so:
+[conventional commit type]. Now use `Squash and Merge` to squash the branch onto master and write a standardized commit message while doing so:
 
 ---
 
@@ -35,3 +42,5 @@ Edit the PR title by adding a semantic prefix like `fix: ` or `feat: ` or any ot
 ## License
 
 [Apache 2.0](LICENSE)
+
+[conventional commit type]: https://github.com/commitizen/conventional-commit-types/blob/master/index.json
