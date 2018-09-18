@@ -36,7 +36,7 @@
     "jest": "^23.4.0",
     "nock": "^9.4.2",
     "semantic-release": "^12.2.2",
-    "standard": "^11.0.0"
+    "standard": "^12.0.1"
   },
   "engines": {
     "node": "8"
