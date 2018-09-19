@@ -95,15 +95,15 @@ describe('handlePullRequestChange', () => {
 
 function unsemanticCommits () {
   return [
-    {commit: {message: 'fix something'}},
-    {commit: {message: 'fix something else'}}
+    { commit: { message: 'fix something' } },
+    { commit: { message: 'fix something else' } }
   ]
 }
 
 function semanticCommits () {
   return [
-    {commit: {message: 'build: something'}},
-    {commit: {message: 'build: something else'}}
+    { commit: { message: 'build: something' } },
+    { commit: { message: 'build: something else' } }
   ]
 }
 
@@ -116,7 +116,7 @@ function buildContext (overrides) {
 
     // context.repo() is a probot convenience function
     repo: (obj = {}) => {
-      return Object.assign({owner: 'sally', repo: 'project-x'}, obj)
+      return Object.assign({ owner: 'sally', repo: 'project-x' }, obj)
     },
 
     payload: {
