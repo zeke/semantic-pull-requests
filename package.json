@@ -1,5 +1,5 @@
 {
-  "name": "semantic-pull-requests",
+  "name": "commit-cop",
   "version": "0.0.0-development",
   "description": "GitHub status check that ensures your pull requests follow the Conventional Commits spec",
   "main": "index.js",
@@ -24,7 +24,6 @@
     "probot",
     "probot-plugin"
   ],
-  "author": "Zeke Sikelianos (https://github.com/zeke)",
   "license": "Apache-2.0",
   "dependencies": {
     "conventional-commit-types": "^2.2.0",
