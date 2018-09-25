@@ -19,7 +19,7 @@
       "jest"
     ]
   },
-  "repository": "https://github.com/probot/semantic-pull-requests",
+  "repository": "https://github.com/zieka/commit-cop",
   "keywords": [
     "probot",
     "probot-plugin"
@@ -27,7 +27,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "conventional-commit-types": "^2.2.0",
-    "glitch-deploy": "^1.1.3",
+    "glitch-deploy": "https://github.com/zieka/glitch-deploy",
     "parse-commit-message": "^1.1.2",
     "probot": "^7.0.1"
   },

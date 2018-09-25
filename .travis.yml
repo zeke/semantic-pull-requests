@@ -1,7 +1,8 @@
 language: node_js
 
-node_js:
-  - "8"
+node_js: lts/*
+addons:
+  chrome: stable
 
 install:
   - npm install
