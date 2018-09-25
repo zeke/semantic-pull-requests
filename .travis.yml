@@ -5,18 +5,8 @@ cache:
 node_js:
   - lts/*
 
-branches:
-  only:
-    - master
+install:
+  - npm install
 
-stages:
-  - test
-  - name: release
-    if: branch = master AND type IN (push)
-
-jobs:
-  include:
-    - stage: test
-      script: npm run test
-    - stage: release
-      node_js: lts/*
+script:
+  - npm run test
