@@ -1,5 +1,8 @@
 .env
+.vim
 .npmrc
 coverage
 node_modules
 private-key.pem
+.glitch-assets
+shrinkwrap.yaml
