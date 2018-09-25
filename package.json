@@ -10,7 +10,6 @@
   "scripts": {
     "start": "probot run ./index.js",
     "test:watch": "DEBUG=octokitz:rest* jest test/* --watch --notify --notifyMode=change --coverage",
-    "lint": "standard --fix",
     "semantic-release": "semantic-release",
     "deploy": "glitch-deploy"
   },
@@ -33,5 +32,16 @@
   },
   "engines": {
     "node": "8"
-  }
+  },
+  "prettier": {
+		"printWidth": 140,
+		"tabWidth": 4,
+		"useTabs": true,
+		"semi": true,
+		"singleQuote": true,
+		"trailingComma": "none",
+		"bracketSpacing": true,
+		"jsxBracketSameLine": true,
+		"arrowParens": "always"
+	}
 }
