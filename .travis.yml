@@ -1,0 +1,22 @@
+language: node_js
+cache:
+  directories:
+    - $HOME/.npm
+node_js:
+  - lts/*
+
+branches:
+  only:
+    - master
+
+stages:
+  - test
+  - name: release
+    if: branch = master AND type IN (push)
+
+jobs:
+  include:
+    - stage: test
+      script: npm run test
+    - stage: release
+      node_js: lts/*
