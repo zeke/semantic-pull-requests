@@ -11,7 +11,7 @@
     "start": "probot run ./index.js",
     "test": "echo 'no tests yet'",
     "now-start": "PRIVATE_KEY=$(echo $PRIVATE_KEY_BASE64 | base64 -d) npm start",
-    "ci:build": "npx now -e APP_ID=$APP_ID -e WEBHOOK_SECRET=$WEBHOOK_SECRET -e NODE_ENV=production -e PRIVATE_KEY_BASE64=$PRIVATE_KEY_BASE64 --public",
+    "ci:build": "npx now -e APP_ID=$APP_ID -e WEBHOOK_SECRET=$WEBHOOK_SECRET -e NODE_ENV=production -e PRIVATE_KEY_BASE64=$PRIVATE_KEY_BASE64 --public --token=$NOW_TOKEN",
     "ci:alias": "npx now alias --token=$NOW_TOKEN",
     "ci:clean": "npx now remove commit-cop --safe --yes --token=$NOW_TOKEN",
     "ci:deploy": "npm run ci:build && npm run ci:alias && npm run ci:clean"
