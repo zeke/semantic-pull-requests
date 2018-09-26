@@ -1,5 +1,10 @@
+.gitconfig
 .env
+.vim
+.data
 .npmrc
 coverage
 node_modules
 private-key.pem
+.glitch-assets
+shrinkwrap.yaml
