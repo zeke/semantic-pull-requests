@@ -1,6 +1,7 @@
 .gitconfig
 .env
 .vim
+.data
 .npmrc
 coverage
 node_modules

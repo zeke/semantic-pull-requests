@@ -2,7 +2,27 @@ language: node_js
 
 node_js: lts/*
 addons:
-  chrome: stable
+    chrome: stable
 
 install:
-  - npm install
+    - npm install
+
+branches:
+    only:
+        - master
+
+stages:
+    - test
+    - name: release
+      if: branch = master AND type IN (push)
+
+jobs:
+    include:
+        - stage: test
+          script: npm run test
+        - stage: release
+          node_js: lts/*
+          deploy:
+              script: npm run ci:deploy
+              provider: script
+              skip_cleanup: true

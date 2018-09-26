@@ -1,7 +1,7 @@
 {
   "name": "commit-cop",
-  "version": "0.0.0-development",
-  "description": "GitHub status check that ensures your pull requests follow the Conventional Commits spec",
+  "version": "0.0.3-development",
+  "description": "cop that cracks down on your commits",
   "main": "index.js",
   "files": [
     "index.js",
@@ -9,14 +9,16 @@
   ],
   "scripts": {
     "start": "probot run ./index.js",
-    "test:watch": "DEBUG=octokitz:rest* jest test/* --watch --notify --notifyMode=change --coverage",
-    "semantic-release": "semantic-release",
-    "deploy": "glitch-deploy"
+    "test": "echo 'no tests yet'",
+    "now-start": "PRIVATE_KEY=$(echo $PRIVATE_KEY_BASE64 | base64 -d) npm start",
+    "ci:build": "npx now -e APP_ID=$APP_ID -e WEBHOOK_SECRET=$WEBHOOK_SECRET -e NODE_ENV=production -e PRIVATE_KEY_BASE64=$PRIVATE_KEY_BASE64 --public",
+    "ci:alias": "npx now alias --token=$NOW_TOKEN",
+    "ci:clean": "npx now remove commit-cop --safe --yes --token=$NOW_TOKEN",
+    "ci:deploy": "npm run ci:build && npm run ci:alias && npm run ci:clean"
+
   },
-  "standard": {
-    "env": [
-      "jest"
-    ]
+  "now":{
+    "alias": "commit-cop-bot.now.sh"
   },
   "repository": "https://github.com/zieka/commit-cop",
   "keywords": [
@@ -25,10 +27,9 @@
   ],
   "license": "Apache-2.0",
   "dependencies": {
-    "conventional-commit-types": "^2.2.0",
-    "glitch-deploy": "https://github.com/zieka/glitch-deploy",
+    "conventional-commit-types": "2.2.0",
     "parse-commit-message": "^1.1.2",
-    "probot": "^7.0.1"
+    "probot": "7.1.2"
   },
   "engines": {
     "node": "8"
