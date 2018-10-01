@@ -9,15 +9,16 @@
   ],
   "scripts": {
     "start": "probot run ./index.js",
-    "test": "echo 'no tests yet'",
+    "test": "npm run prettier-check",
+    "prettier-check": "prettier --config package.json --list-different './lib/**/*'",
+    "prettier-format": "prettier --config package.json --write './lib/**/*'",
     "now-start": "PRIVATE_KEY=$(echo $PRIVATE_KEY_BASE64 | base64 -d) npm start",
     "ci:build": "npx now -e APP_ID=$APP_ID -e WEBHOOK_SECRET=$WEBHOOK_SECRET -e NODE_ENV=production -e PRIVATE_KEY_BASE64=$PRIVATE_KEY_BASE64 --public --token=$NOW_TOKEN",
     "ci:alias": "npx now alias --token=$NOW_TOKEN",
     "ci:clean": "npx now remove commit-cop --safe --yes --token=$NOW_TOKEN",
     "ci:deploy": "npm run ci:build && npm run ci:alias && npm run ci:clean"
-
   },
-  "now":{
+  "now": {
     "alias": "commit-cop-bot.now.sh"
   },
   "repository": "https://github.com/zieka/commit-cop",
@@ -35,14 +36,17 @@
     "node": "8"
   },
   "prettier": {
-		"printWidth": 140,
-		"tabWidth": 4,
-		"useTabs": true,
-		"semi": true,
-		"singleQuote": true,
-		"trailingComma": "none",
-		"bracketSpacing": true,
-		"jsxBracketSameLine": true,
-		"arrowParens": "always"
-	}
+    "printWidth": 140,
+    "tabWidth": 4,
+    "useTabs": true,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "none",
+    "bracketSpacing": true,
+    "jsxBracketSameLine": true,
+    "arrowParens": "always"
+  },
+  "devDependencies": {
+    "prettier": "^1.14.3"
+  }
 }
