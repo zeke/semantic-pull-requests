@@ -25,6 +25,8 @@ describe('handlePullRequestChange', () => {
       .reply(200, unsemanticCommits())
       .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
       .reply(200)
+      .get('/repos/sally/project-x/contents/.github/semantic.yml')
+      .reply(200, getConfigResponse())
 
     await handlePullRequestChange(context)
     expect(mock.isDone()).toBe(true)
@@ -45,6 +47,8 @@ describe('handlePullRequestChange', () => {
       .reply(200, semanticCommits())
       .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
       .reply(200)
+      .get('/repos/sally/project-x/contents/.github/semantic.yml')
+      .reply(200, getConfigResponse())
 
     await handlePullRequestChange(context)
     expect(mock.isDone()).toBe(true)
@@ -66,6 +70,8 @@ describe('handlePullRequestChange', () => {
       .reply(200, unsemanticCommits())
       .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
       .reply(200)
+      .get('/repos/sally/project-x/contents/.github/semantic.yml')
+      .reply(200, getConfigResponse())
 
     await handlePullRequestChange(context)
     expect(mock.isDone()).toBe(true)
@@ -87,6 +93,30 @@ describe('handlePullRequestChange', () => {
       .reply(200, unsemanticCommits())
       .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
       .reply(200)
+      .get('/repos/sally/project-x/contents/.github/semantic.yml')
+      .reply(200, getConfigResponse())
+
+    await handlePullRequestChange(context)
+    expect(mock.isDone()).toBe(true)
+  })
+
+  test('Only lints title if titleOnly: true in config', async () => {
+    const context = buildContext()
+    context.payload.pull_request.title = 'build: do a thing'
+    const expectedBody = {
+      state: 'success',
+      target_url: 'https://github.com/probot/semantic-pull-requests',
+      description: 'ready to be squashed',
+      context: 'Semantic Pull Request'
+    }
+
+    const mock = nock('https://api.github.com')
+      .get('/repos/sally/project-x/pulls/123/commits')
+      .reply(200, unsemanticCommits())
+      .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
+      .reply(200)
+      .get('/repos/sally/project-x/contents/.github/semantic.yml')
+      .reply(200, getConfigResponse('titleOnly: true'))
 
     await handlePullRequestChange(context)
     expect(mock.isDone()).toBe(true)
@@ -131,4 +161,8 @@ function buildContext (overrides) {
   }
 
   return Object.assign({}, defaults, overrides)
+}
+
+function getConfigResponse (content = '') {
+  return { content: Buffer.from(content).toString('base64') }
 }

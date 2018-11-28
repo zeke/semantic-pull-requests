@@ -5,7 +5,7 @@
 Using [semantic-release](https://github.com/semantic-release/semantic-release)
 and [conventional commit messages](https://conventionalcommits.org)? Install this
 [Probot](https://probot.github.io/) app
-on your repos to ensure your pull requests are semantic before you merge them. 
+on your repos to ensure your pull requests are semantic before you merge them.
 
 ## How it works
 
@@ -38,6 +38,15 @@ Edit the PR title by adding a semantic prefix like `fix: ` or `feat: ` or any ot
 ## Installation
 
 👉 [github.com/apps/semantic-pull-requests](https://github.com/apps/semantic-pull-requests)
+
+## Config
+You can add a `semantic.yml` file to your `.github` directory with the following
+optional settings:
+```
+# Only lint the title, ignoring the commits. Useful when squashing as PR title
+# is the default squashed commit message.
+titleOnly: false
+```
 
 ## License
 
