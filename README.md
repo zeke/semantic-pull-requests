@@ -7,7 +7,18 @@ and [conventional commit messages](https://conventionalcommits.org)? Install thi
 [Probot](https://probot.github.io/) app
 on your repos to ensure your pull requests are semantic before you merge them.
 
+
 ## How it works
+
+👮 Note! The default behavior of this bot is not to police all commit messages, 
+but rather to ensure that every PR has **just enough semantic information** to be 
+able to trigger a release when appropriate. The goal is to gather this semantic
+information in a way that doesn't make life harder for project contributors, 
+especially newcomers who may not know how to amend their git commit history.
+
+By default, only the PR title OR at least one 
+commit messsage needs to have semantic prefix. If you wish to change this 
+behavior, see [configuration](#configuration) section below.
 
 Scenario | Status | Status Check Message
 -------- | ------ | -------
@@ -39,12 +50,16 @@ Edit the PR title by adding a semantic prefix like `fix: ` or `feat: ` or any ot
 
 👉 [github.com/apps/semantic-pull-requests](https://github.com/apps/semantic-pull-requests)
 
-## Config
-You can add a `semantic.yml` file to your `.github` directory with the following
-optional settings:
-```
-# Only lint the title, ignoring the commits. Useful when squashing as PR title
-# is the default squashed commit message.
+## Configuration
+
+By default, no configuration is necessary.
+
+If you wish to override some 
+behaviors, you can add a `semantic.yml` file to your `.github` directory with 
+the following optional settings:
+
+```yml
+# Always validate the PR title, and ignore the commits
 titleOnly: false
 ```
 
