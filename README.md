@@ -60,7 +60,12 @@ the following optional settings:
 
 ```yml
 # Always validate the PR title, and ignore the commits
-titleOnly: false
+titleOnly: true
+```
+
+```yml
+# Always validate all commits, and ignore the PR title
+commitsOnly: true
 ```
 
 ## License
