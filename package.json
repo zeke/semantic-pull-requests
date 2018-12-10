@@ -30,7 +30,7 @@
     "conventional-commit-types": "^2.2.0",
     "parse-commit-message": "^3.2.1",
     "probot": "^7.0.1",
-    "probot-config": "^0.2.0"
+    "probot-config": "^1.0.0"
   },
   "devDependencies": {
     "@octokit/rest": "^15.9.4",
