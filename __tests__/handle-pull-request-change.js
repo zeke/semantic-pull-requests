@@ -190,6 +190,96 @@ describe('handlePullRequestChange', () => {
     })
   })
 
+  describe('when `titleAndCommits` is set to `true` in config', () => {
+    test('sets `pending` status if PR has no semantic PR title', async () => {
+      const context = buildContext()
+      context.payload.pull_request.title = 'do a thing'
+      const expectedBody = {
+        state: 'pending',
+        target_url: 'https://github.com/probot/semantic-pull-requests',
+        description: 'add a semantic commit AND PR title',
+        context: 'Semantic Pull Request'
+      }
+
+      const mock = nock('https://api.github.com')
+        .get('/repos/sally/project-x/pulls/123/commits')
+        .reply(200, unsemanticCommits())
+        .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
+        .reply(200)
+        .get('/repos/sally/project-x/contents/.github/semantic.yml')
+        .reply(200, getConfigResponse('titleAndCommits: true'))
+
+      await handlePullRequestChange(context)
+      expect(mock.isDone()).toBe(true)
+    })
+
+    test('sets `pending` status if PR has no semantic PR title but has semantic commits', async () => {
+      const context = buildContext()
+      context.payload.pull_request.title = 'do a thing'
+      const expectedBody = {
+        state: 'pending',
+        target_url: 'https://github.com/probot/semantic-pull-requests',
+        description: 'add a semantic commit AND PR title',
+        context: 'Semantic Pull Request'
+      }
+
+      const mock = nock('https://api.github.com')
+        .get('/repos/sally/project-x/pulls/123/commits')
+        .reply(200, semanticCommits())
+        .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
+        .reply(200)
+        .get('/repos/sally/project-x/contents/.github/semantic.yml')
+        .reply(200, getConfigResponse('titleAndCommits: true'))
+
+      await handlePullRequestChange(context)
+      expect(mock.isDone()).toBe(true)
+    })
+
+    test('sets `pending` status if PR has no semantic PR title and has no semantic commits', async () => {
+      const context = buildContext()
+      context.payload.pull_request.title = 'do a thing'
+      const expectedBody = {
+        state: 'pending',
+        target_url: 'https://github.com/probot/semantic-pull-requests',
+        description: 'add a semantic commit AND PR title',
+        context: 'Semantic Pull Request'
+      }
+
+      const mock = nock('https://api.github.com')
+        .get('/repos/sally/project-x/pulls/123/commits')
+        .reply(200, unsemanticCommits())
+        .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
+        .reply(200)
+        .get('/repos/sally/project-x/contents/.github/semantic.yml')
+        .reply(200, getConfigResponse('titleAndCommits: true'))
+
+      await handlePullRequestChange(context)
+      expect(mock.isDone()).toBe(true)
+    })
+
+    test('lints title and commits', async () => {
+      const context = buildContext()
+      context.payload.pull_request.title = 'build: do a thing'
+      const expectedBody = {
+        state: 'success',
+        target_url: 'https://github.com/probot/semantic-pull-requests',
+        description: 'ready to be merged, squashed or rebased',
+        context: 'Semantic Pull Request'
+      }
+
+      const mock = nock('https://api.github.com')
+        .get('/repos/sally/project-x/pulls/123/commits')
+        .reply(200, semanticCommits())
+        .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
+        .reply(200)
+        .get('/repos/sally/project-x/contents/.github/semantic.yml')
+        .reply(200, getConfigResponse('titleAndCommits: true'))
+
+      await handlePullRequestChange(context)
+      expect(mock.isDone()).toBe(true)
+    })
+  })
+
   test('sets `success` status and `ready to be merged or squashed` description if PR has semantic commits but no semantic title', async () => {
     const context = buildContext()
     context.payload.pull_request.title = 'bananas'
