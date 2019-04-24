@@ -73,6 +73,14 @@ commitsOnly: true
 titleAndCommits: true
 ```
 
+```yml
+# You can define a list of valid scopes
+scopes:
+  - scope1
+  - scope2
+  ...
+```
+
 ## License
 
 [Apache 2.0](LICENSE)
