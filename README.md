@@ -68,6 +68,11 @@ titleOnly: true
 commitsOnly: true
 ```
 
+```yml
+# Always validate the PR title AND all the commits
+titleAndCommits: true
+```
+
 ## License
 
 [Apache 2.0](LICENSE)
