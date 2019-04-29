@@ -32,6 +32,118 @@ describe('handlePullRequestChange', () => {
     expect(mock.isDone()).toBe(true)
   })
 
+  describe('custom scopes', () => {
+    test('sets `success` status if PR has semantic title with available scope', async () => {
+      const context = buildContext()
+      context.payload.pull_request.title = 'fix(scope1): bananas'
+      const expectedBody = {
+        state: 'success',
+        description: 'ready to be squashed',
+        target_url: 'https://github.com/probot/semantic-pull-requests',
+        context: 'Semantic Pull Request'
+      }
+
+      const mock = nock('https://api.github.com')
+        .get('/repos/sally/project-x/pulls/123/commits')
+        .reply(200, semanticCommits())
+        .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
+        .reply(200)
+        .get('/repos/sally/project-x/contents/.github/semantic.yml')
+        .reply(200, getConfigResponse(`
+          titleOnly: true
+          scopes:
+            - scope1
+            - scope2
+          `))
+
+      await handlePullRequestChange(context)
+      expect(mock.isDone()).toBe(true)
+    })
+
+    test('sets `pending` status if PR has semantic title with invalid scope', async () => {
+      const context = buildContext()
+      context.payload.pull_request.title = 'fix(scope3): do a thing'
+      const expectedBody = {
+        state: 'pending',
+        target_url: 'https://github.com/probot/semantic-pull-requests',
+        description: 'add a semantic PR title',
+        context: 'Semantic Pull Request'
+      }
+
+      const mock = nock('https://api.github.com')
+        .get('/repos/sally/project-x/pulls/123/commits')
+        .reply(200, semanticCommits())
+        .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
+        .reply(200)
+        .get('/repos/sally/project-x/contents/.github/semantic.yml')
+        .reply(200, getConfigResponse(`
+          titleOnly: true
+          scopes:
+            - scope1
+            - scope2
+          `))
+
+      await handlePullRequestChange(context)
+      expect(mock.isDone()).toBe(true)
+    })
+
+    test('sets `pending` status if PR has semantic commit with invalid scope', async () => {
+      const context = buildContext()
+      context.payload.pull_request.title = 'fix(scope3): do a thing'
+      const expectedBody = {
+        state: 'pending',
+        target_url: 'https://github.com/probot/semantic-pull-requests',
+        description: 'make sure every commit is semantic',
+        context: 'Semantic Pull Request'
+      }
+
+      const mock = nock('https://api.github.com')
+        .get('/repos/sally/project-x/pulls/123/commits')
+        .reply(200, semanticCommits())
+        .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
+        .reply(200)
+        .get('/repos/sally/project-x/contents/.github/semantic.yml')
+        .reply(200, getConfigResponse(`
+          commitsOnly: true
+          scopes:
+            - scope3
+            - scope4
+          `
+        ))
+
+      await handlePullRequestChange(context)
+      expect(mock.isDone()).toBe(true)
+    })
+
+    test('sets `success` status if PR has semantic title with available scope', async () => {
+      const context = buildContext()
+      context.payload.pull_request.title = 'fix(scope1): bananas'
+      const expectedBody = {
+        state: 'success',
+        description: 'ready to be squashed',
+        target_url: 'https://github.com/probot/semantic-pull-requests',
+        context: 'Semantic Pull Request'
+      }
+
+      const mock = nock('https://api.github.com')
+        .get('/repos/sally/project-x/pulls/123/commits')
+        .reply(200, semanticCommits())
+        .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
+        .reply(200)
+        .get('/repos/sally/project-x/contents/.github/semantic.yml')
+        .reply(200, getConfigResponse(`
+          titleOnly: true
+          scopes:
+            - scope1
+            - scope2
+          `
+        ))
+
+      await handlePullRequestChange(context)
+      expect(mock.isDone()).toBe(true)
+    })
+  })
+
   describe('when `commitsOnly` is set to `true` in config', () => {
     test('sets `pending` status if PR has no semantic commits', async () => {
       const context = buildContext()
@@ -358,8 +470,8 @@ function unsemanticCommits () {
 
 function semanticCommits () {
   return [
-    { commit: { message: 'build: something' } },
-    { commit: { message: 'build: something else' } }
+    { commit: { message: 'build(scope1): something' } },
+    { commit: { message: 'build(scope2): something else' } }
   ]
 }
 
