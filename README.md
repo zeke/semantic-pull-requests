@@ -81,6 +81,12 @@ scopes:
   ...
 ```
 
+```yml
+# Allow use of Merge commits (eg on github: "Merge branch 'master' into feature/ride-unicorns")
+# this is only relevant when using commitsOnly: true (or titleAndCommits: true)
+allowMergeCommits: true
+```
+
 ## License
 
 [Apache 2.0](LICENSE)
