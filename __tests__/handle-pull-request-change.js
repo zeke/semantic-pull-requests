@@ -406,6 +406,7 @@ describe('handlePullRequestChange', () => {
       const mock = nock('https://api.github.com')
         .get('/repos/sally/project-x/pulls/123/commits')
         .reply(200, [
+          ...semanticCommits(),
           { commit: { message: 'Merge branch \'master\' into feature/logout' } }
         ])
         .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
@@ -413,6 +414,9 @@ describe('handlePullRequestChange', () => {
         .get('/repos/sally/project-x/contents/.github/semantic.yml')
         .reply(200, getConfigResponse(`
           commitsOnly: true
+          scopes:
+            - scope1
+            - scope2
           allowMergeCommits: true
           `))
 
