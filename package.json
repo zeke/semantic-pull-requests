@@ -28,18 +28,18 @@
   "license": "Apache-2.0",
   "dependencies": {
     "conventional-commit-types": "^2.2.0",
-    "parse-commit-message": "^3.2.1",
-    "probot": "^7.0.1",
-    "probot-config": "^1.0.0"
+    "parse-commit-message": "^3.2.3",
+    "probot": "^9.2.20",
+    "probot-config": "^1.1.0"
   },
   "devDependencies": {
-    "@octokit/rest": "^15.9.4",
-    "jest": "^23.4.0",
-    "nock": "^9.4.2",
+    "@octokit/rest": "^16.28.7",
+    "jest": "^23.6.0",
+    "nock": "^9.6.1",
     "semantic-release": "^12.2.2",
     "standard": "^12.0.1"
   },
   "engines": {
-    "node": "8"
+    "node": "10"
   }
 }
