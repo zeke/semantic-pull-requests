@@ -74,6 +74,11 @@ titleAndCommits: true
 ```
 
 ```yml
+# Validate either the commit message (for single-commit PRs) or the PR title (for multiple commit PRs):
+squashMessage: true
+```
+
+```yml
 # You can define a list of valid scopes
 scopes:
   - scope1
