@@ -521,6 +521,52 @@ describe('handlePullRequestChange', () => {
     await handlePullRequestChange(context)
     expect(mock.isDone()).toBe(true)
   })
+
+  describe('when `squashMessage` is set to `true` in config', () => {
+    test('sets `pending` status if PR has multiple commits and no semantic PR title', async () => {
+      const context = buildContext()
+      context.payload.pull_request.title = 'do a thing'
+      const expectedBody = {
+        state: 'pending',
+        target_url: 'https://github.com/probot/semantic-pull-requests',
+        description: 'add a semantic PR title',
+        context: 'Semantic Pull Request'
+      }
+
+      const mock = nock('https://api.github.com')
+        .get('/repos/sally/project-x/pulls/123/commits')
+        .reply(200, unsemanticCommits())
+        .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
+        .reply(200)
+        .get('/repos/sally/project-x/contents/.github/semantic.yml')
+        .reply(200, getConfigResponse('squashMessage: true'))
+
+      await handlePullRequestChange(context)
+      expect(mock.isDone()).toBe(true)
+    })
+
+    test('sets `pending` status if PR has one commit without semantic message ', async () => {
+      const context = buildContext()
+      context.payload.pull_request.title = 'Fxi: do a thing'
+      const expectedBody = {
+        state: 'pending',
+        target_url: 'https://github.com/probot/semantic-pull-requests',
+        description: 'make sure commit is semantic',
+        context: 'Semantic Pull Request'
+      }
+
+      const mock = nock('https://api.github.com')
+        .get('/repos/sally/project-x/pulls/123/commits')
+        .reply(200, [unsemanticCommits()[0]])
+        .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
+        .reply(200)
+        .get('/repos/sally/project-x/contents/.github/semantic.yml')
+        .reply(200, getConfigResponse('squashMessage: true'))
+
+      await handlePullRequestChange(context)
+      expect(mock.isDone()).toBe(true)
+    })
+  })
 })
 
 function unsemanticCommits () {
