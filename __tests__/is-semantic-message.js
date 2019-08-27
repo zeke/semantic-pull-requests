@@ -26,4 +26,25 @@ describe('isSemanticMessage', () => {
 
     expect(isSemanticMessage('Merge refs/heads/master into angry-burritos/US-335', ['fix'], ['scope1'], true)).toBe(true)
   })
+
+  test('should check for allowed types', () => {
+    const commonConventionalCommitType = [
+      'feat',
+      'fix',
+      'refactor'
+    ]
+
+    expect(isSemanticMessage('feat: Add something', commonConventionalCommitType)).toBe(true)
+    expect(isSemanticMessage('fix: Fix something', commonConventionalCommitType)).toBe(true)
+    expect(isSemanticMessage('refactor: Updated something', commonConventionalCommitType)).toBe(true)
+
+    const customConventionalCommitType = [
+      'feat',
+      'fix',
+      'refactor',
+      'alternative'
+    ]
+    expect(isSemanticMessage('alternative: Do alternative stuff', customConventionalCommitType)).toBe(true)
+    expect(isSemanticMessage('other: Do other stuff', customConventionalCommitType)).toBe(false)
+  })
 })
