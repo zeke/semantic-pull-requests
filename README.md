@@ -82,6 +82,23 @@ scopes:
 ```
 
 ```yml
+# By default types specified in commitizen/conventional-commit-types is used
+# You can override the valid types
+types:
+  - feat
+  - fix
+  - docs
+  - style
+  - refactor
+  - perf
+  - test
+  - build
+  - ci
+  - chore
+  - revert
+```
+
+```yml
 # Allow use of Merge commits (eg on github: "Merge branch 'master' into feature/ride-unicorns")
 # this is only relevant when using commitsOnly: true (or titleAndCommits: true)
 allowMergeCommits: true
