@@ -49,7 +49,7 @@ describe('isSemanticMessage', () => {
   })
 
   test('should fail if invalid types variable is provided', () => {
-    expect(isSemanticMessage('fix: Do other stuff', null)).toThrowError(TypeError)
-    expect(isSemanticMessage('fix: Do other stuff', undefined)).toThrowError(TypeError)
+    expect(() => isSemanticMessage('fix: Do other stuff', null)).toThrowError(TypeError)
+    expect(() => isSemanticMessage('fix: Do other stuff', undefined)).toThrowError(TypeError)
   })
 })
