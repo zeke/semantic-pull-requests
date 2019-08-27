@@ -47,4 +47,9 @@ describe('isSemanticMessage', () => {
     expect(isSemanticMessage('alternative: Do alternative stuff', customConventionalCommitType)).toBe(true)
     expect(isSemanticMessage('other: Do other stuff', customConventionalCommitType)).toBe(false)
   })
+
+  test('should fail if invalid types variable is provided', () => {
+    expect(isSemanticMessage('fix: Do other stuff', null)).toThrowError(TypeError)
+    expect(isSemanticMessage('fix: Do other stuff', undefined)).toThrowError(TypeError)
+  })
 })
