@@ -82,7 +82,8 @@ scopes:
 ```
 
 ```yml
-# By default types specified in commitizen/conventional-commit-types is used
+# By default types specified in commitizen/conventional-commit-types is used.
+# See: https://github.com/commitizen/conventional-commit-types/blob/v2.2.0/index.json
 # You can override the valid types
 types:
   - feat
