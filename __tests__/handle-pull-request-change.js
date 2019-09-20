@@ -392,6 +392,89 @@ describe('handlePullRequestChange', () => {
     })
   })
 
+  describe('when `anyCommit` is set to `true` in config', () => {
+    describe.each([
+      ['commitsOnly', 'add a semantic commit'],
+      ['titleAndCommits', 'add a semantic commit AND PR title']
+    ])('when no commits are semantic and `%s` is set to `true` in config', (configOption, description) => {
+      test(('sets `pending` status with description: ' + description), async () => {
+        const context = buildContext()
+        context.payload.pull_request.title = 'fix: bananas'
+        const expectedBody = {
+          state: 'pending',
+          target_url: 'https://github.com/probot/semantic-pull-requests',
+          description: description,
+          context: 'Semantic Pull Request'
+        }
+
+        const mock = nock('https://api.github.com')
+          .get('/repos/sally/project-x/pulls/123/commits')
+          .reply(200, unsemanticCommits())
+          .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
+          .reply(200)
+          .get('/repos/sally/project-x/contents/.github/semantic.yml')
+          .reply(200, getConfigResponse(configOption + ': true\nanyCommit: true'))
+
+        await handlePullRequestChange(context)
+        expect(mock.isDone()).toBe(true)
+      })
+    })
+
+    describe.each([
+      ['commitsOnly', 'ready to be merged or rebased'],
+      ['titleAndCommits', 'ready to be merged, squashed or rebased']
+    ])('when all commits are semantic and `%s` is set to `true` in config', (configOption, description) => {
+      test(('sets `success` status with description: ' + description), async () => {
+        const context = buildContext()
+        context.payload.pull_request.title = 'fix: bananas'
+        const expectedBody = {
+          state: 'success',
+          target_url: 'https://github.com/probot/semantic-pull-requests',
+          description: description,
+          context: 'Semantic Pull Request'
+        }
+
+        const mock = nock('https://api.github.com')
+          .get('/repos/sally/project-x/pulls/123/commits')
+          .reply(200, semanticCommits())
+          .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
+          .reply(200)
+          .get('/repos/sally/project-x/contents/.github/semantic.yml')
+          .reply(200, getConfigResponse(configOption + ': true\nanyCommit: true'))
+
+        await handlePullRequestChange(context)
+        expect(mock.isDone()).toBe(true)
+      })
+    })
+
+    describe.each([
+      ['commitsOnly', 'ready to be merged or rebased'],
+      ['titleAndCommits', 'ready to be merged, squashed or rebased']
+    ])('when some commits are semantic and `%s` is set to `true` in config', (configOption, description) => {
+      test(('sets `success` status with description: ' + description), async () => {
+        const context = buildContext()
+        context.payload.pull_request.title = 'fix: bananas'
+        const expectedBody = {
+          state: 'success',
+          target_url: 'https://github.com/probot/semantic-pull-requests',
+          description: description,
+          context: 'Semantic Pull Request'
+        }
+
+        const mock = nock('https://api.github.com')
+          .get('/repos/sally/project-x/pulls/123/commits')
+          .reply(200, [...unsemanticCommits(), ...semanticCommits()])
+          .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
+          .reply(200)
+          .get('/repos/sally/project-x/contents/.github/semantic.yml')
+          .reply(200, getConfigResponse(configOption + ': true\nanyCommit: true'))
+
+        await handlePullRequestChange(context)
+        expect(mock.isDone()).toBe(true)
+      })
+    })
+  })
+
   describe('when `allowMergeCommits` is set to `true` AND `commitsOnly`is set to `true` too in config', () => {
     test('sets `success` status if PR has Merge commit', async () => {
       const context = buildContext()

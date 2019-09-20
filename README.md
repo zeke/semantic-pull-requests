@@ -74,6 +74,13 @@ titleAndCommits: true
 ```
 
 ```yml
+# Require at least one commit to be valid
+# this is only relevant when using commitsOnly: true or titleAndCommits: true,
+# which validate all commits by default
+anyCommit: true
+```
+
+```yml
 # You can define a list of valid scopes
 scopes:
   - scope1
