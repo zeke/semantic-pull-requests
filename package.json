@@ -28,7 +28,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "conventional-commit-types": "^2.2.0",
-    "parse-commit-message": "^4.0.0-alpha.12",
+    "parse-commit-message": "^4.0.0-canary.20",
     "probot": "^7.0.1",
     "probot-config": "^1.0.0"
   },
