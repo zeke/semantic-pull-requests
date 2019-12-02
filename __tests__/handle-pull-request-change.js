@@ -10,11 +10,11 @@ describe('handlePullRequestChange', () => {
     expect(typeof handlePullRequestChange).toBe('function')
   })
 
-  test('sets `pending` status if PR has no semantic commits and no semantic title', async () => {
+  test('sets `failure` status if PR has no semantic commits and no semantic title', async () => {
     const context = buildContext()
     context.payload.pull_request.title = 'do a thing'
     const expectedBody = {
-      state: 'pending',
+      state: 'failure',
       target_url: 'https://github.com/probot/semantic-pull-requests',
       description: 'add a semantic commit or PR title',
       context: 'Semantic Pull Request'
@@ -60,11 +60,11 @@ describe('handlePullRequestChange', () => {
       expect(mock.isDone()).toBe(true)
     })
 
-    test('sets `pending` status if PR has semantic title with invalid scope', async () => {
+    test('sets `failure` status if PR has semantic title with invalid scope', async () => {
       const context = buildContext()
       context.payload.pull_request.title = 'fix(scope3): do a thing'
       const expectedBody = {
-        state: 'pending',
+        state: 'failure',
         target_url: 'https://github.com/probot/semantic-pull-requests',
         description: 'add a semantic PR title',
         context: 'Semantic Pull Request'
@@ -87,11 +87,11 @@ describe('handlePullRequestChange', () => {
       expect(mock.isDone()).toBe(true)
     })
 
-    test('sets `pending` status if PR has semantic commit with invalid scope', async () => {
+    test('sets `failure` status if PR has semantic commit with invalid scope', async () => {
       const context = buildContext()
       context.payload.pull_request.title = 'fix(scope3): do a thing'
       const expectedBody = {
-        state: 'pending',
+        state: 'failure',
         target_url: 'https://github.com/probot/semantic-pull-requests',
         description: 'make sure every commit is semantic',
         context: 'Semantic Pull Request'
@@ -145,11 +145,11 @@ describe('handlePullRequestChange', () => {
   })
 
   describe('when `commitsOnly` is set to `true` in config', () => {
-    test('sets `pending` status if PR has no semantic commits', async () => {
+    test('sets `failure` status if PR has no semantic commits', async () => {
       const context = buildContext()
       context.payload.pull_request.title = 'do a thing'
       const expectedBody = {
-        state: 'pending',
+        state: 'failure',
         target_url: 'https://github.com/probot/semantic-pull-requests',
         description: 'make sure every commit is semantic',
         context: 'Semantic Pull Request'
@@ -167,11 +167,11 @@ describe('handlePullRequestChange', () => {
       expect(mock.isDone()).toBe(true)
     })
 
-    test('sets `pending` status if PR has no semantic commits but has a semantic title', async () => {
+    test('sets `failure` status if PR has no semantic commits but has a semantic title', async () => {
       const context = buildContext()
       context.payload.pull_request.title = 'fix: do a thing'
       const expectedBody = {
-        state: 'pending',
+        state: 'failure',
         target_url: 'https://github.com/probot/semantic-pull-requests',
         description: 'make sure every commit is semantic',
         context: 'Semantic Pull Request'
@@ -189,11 +189,11 @@ describe('handlePullRequestChange', () => {
       expect(mock.isDone()).toBe(true)
     })
 
-    test('sets `pending` status if one or commits are not well formed', async () => {
+    test('sets `failure` status if one or commits are not well formed', async () => {
       const context = buildContext()
       context.payload.pull_request.title = 'do a thing'
       const expectedBody = {
-        state: 'pending',
+        state: 'failure',
         target_url: 'https://github.com/probot/semantic-pull-requests',
         description: 'make sure every commit is semantic',
         context: 'Semantic Pull Request'
@@ -235,11 +235,11 @@ describe('handlePullRequestChange', () => {
   })
 
   describe('when `titleOnly` is set to `true` in config', () => {
-    test('sets `pending` status if PR has no semantic PR title', async () => {
+    test('sets `failure` status if PR has no semantic PR title', async () => {
       const context = buildContext()
       context.payload.pull_request.title = 'do a thing'
       const expectedBody = {
-        state: 'pending',
+        state: 'failure',
         target_url: 'https://github.com/probot/semantic-pull-requests',
         description: 'add a semantic PR title',
         context: 'Semantic Pull Request'
@@ -257,11 +257,11 @@ describe('handlePullRequestChange', () => {
       expect(mock.isDone()).toBe(true)
     })
 
-    test('sets `pending` status if PR has no semantic PR title but has semantic commits', async () => {
+    test('sets `failure` status if PR has no semantic PR title but has semantic commits', async () => {
       const context = buildContext()
       context.payload.pull_request.title = 'do a thing'
       const expectedBody = {
-        state: 'pending',
+        state: 'failure',
         target_url: 'https://github.com/probot/semantic-pull-requests',
         description: 'add a semantic PR title',
         context: 'Semantic Pull Request'
@@ -303,11 +303,11 @@ describe('handlePullRequestChange', () => {
   })
 
   describe('when `titleAndCommits` is set to `true` in config', () => {
-    test('sets `pending` status if PR has no semantic PR title', async () => {
+    test('sets `failure` status if PR has no semantic PR title', async () => {
       const context = buildContext()
       context.payload.pull_request.title = 'do a thing'
       const expectedBody = {
-        state: 'pending',
+        state: 'failure',
         target_url: 'https://github.com/probot/semantic-pull-requests',
         description: 'add a semantic commit AND PR title',
         context: 'Semantic Pull Request'
@@ -325,11 +325,11 @@ describe('handlePullRequestChange', () => {
       expect(mock.isDone()).toBe(true)
     })
 
-    test('sets `pending` status if PR has no semantic PR title but has semantic commits', async () => {
+    test('sets `failure` status if PR has no semantic PR title but has semantic commits', async () => {
       const context = buildContext()
       context.payload.pull_request.title = 'do a thing'
       const expectedBody = {
-        state: 'pending',
+        state: 'failure',
         target_url: 'https://github.com/probot/semantic-pull-requests',
         description: 'add a semantic commit AND PR title',
         context: 'Semantic Pull Request'
@@ -347,11 +347,11 @@ describe('handlePullRequestChange', () => {
       expect(mock.isDone()).toBe(true)
     })
 
-    test('sets `pending` status if PR has no semantic PR title and has no semantic commits', async () => {
+    test('sets `failure` status if PR has no semantic PR title and has no semantic commits', async () => {
       const context = buildContext()
       context.payload.pull_request.title = 'do a thing'
       const expectedBody = {
-        state: 'pending',
+        state: 'failure',
         target_url: 'https://github.com/probot/semantic-pull-requests',
         description: 'add a semantic commit AND PR title',
         context: 'Semantic Pull Request'
@@ -397,11 +397,11 @@ describe('handlePullRequestChange', () => {
       ['commitsOnly', 'add a semantic commit'],
       ['titleAndCommits', 'add a semantic commit AND PR title']
     ])('when no commits are semantic and `%s` is set to `true` in config', (configOption, description) => {
-      test(('sets `pending` status with description: ' + description), async () => {
+      test(('sets `failure` status with description: ' + description), async () => {
         const context = buildContext()
         context.payload.pull_request.title = 'fix: bananas'
         const expectedBody = {
-          state: 'pending',
+          state: 'failure',
           target_url: 'https://github.com/probot/semantic-pull-requests',
           description: description,
           context: 'Semantic Pull Request'
@@ -509,11 +509,11 @@ describe('handlePullRequestChange', () => {
   })
 
   describe('when `allowMergeCommits` is set to `false` AND `commitsOnly` is set to `true` in config', () => {
-    test('sets `pending` status if PR has Merge commit', async () => {
+    test('sets `failure` status if PR has Merge commit', async () => {
       const context = buildContext()
       context.payload.pull_request.title = 'fix: bananas'
       const expectedBody = {
-        state: 'pending',
+        state: 'failure',
         description: 'make sure every commit is semantic',
         target_url: 'https://github.com/probot/semantic-pull-requests',
         context: 'Semantic Pull Request'
