@@ -29,7 +29,7 @@
   "dependencies": {
     "conventional-commit-types": "^2.3.0",
     "parse-commit-message": "^4.0.0-canary.20",
-    "probot": "^7.0.1",
+    "probot": "^9.11.1",
     "probot-config": "^1.0.0"
   },
   "devDependencies": {
@@ -40,6 +40,6 @@
     "standard": "^12.0.1"
   },
   "engines": {
-    "node": "8"
+    "node": "12"
   }
 }
