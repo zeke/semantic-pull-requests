@@ -1,0 +1,15 @@
+name: Tests
+
+on: push
+
+jobs:
+  lint:
+    name: Run tests
+    runs-on: ubuntu-latest
+    container: 'node:12-alpine'
+    steps:
+    - uses: actions/checkout@v1
+    - name: npm ci
+      run: npm ci
+    - name: npm test
+      run: npm test
