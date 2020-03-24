@@ -1,0 +1,36 @@
+language: node_js
+cache:
+  directories:
+    - $HOME/.npm
+node_js:
+  - lts/*
+before_install:
+  - npm install -g greenkeeper-lockfile@1
+before_script:
+  - greenkeeper-lockfile-update
+after_script:
+  - greenkeeper-lockfile-upload
+
+# Trigger a push build on master and greenkeeper branches + PRs build on every branches
+# Avoid double build on PRs (See https://github.com/travis-ci/travis-ci/issues/1147)
+branches:
+  only:
+    - master
+    - /^greenkeeper.*$/
+
+stages:
+  - test
+  - name: release
+    if: branch = master AND type IN (push)
+
+jobs:
+  include:
+    - stage: test
+      script: npm run test
+    - stage: release
+      node_js: lts/*
+      script: npm run semantic-release
+      deploy:
+        script: scripts/deploy.sh
+        provider: script
+        skip_cleanup: true
