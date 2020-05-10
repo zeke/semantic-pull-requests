@@ -113,6 +113,12 @@ types:
 allowMergeCommits: true
 ```
 
+```yml
+# Allow use of Revert commits (eg on github: "Revert "feat: ride unicorns"")
+# this is only relevant when using commitsOnly: true (or titleAndCommits: true)
+allowRevertCommits: true
+```
+
 ## License
 
 [Apache 2.0](LICENSE)

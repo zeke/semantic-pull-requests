@@ -537,6 +537,68 @@ describe('handlePullRequestChange', () => {
     })
   })
 
+  describe('when `allowRevertCommits` is set to `true` AND `commitsOnly`is set to `true` too in config', () => {
+    test('sets `success` status if PR has Merge commit', async () => {
+      const context = buildContext()
+      context.payload.pull_request.title = 'fix: bananas'
+      const expectedBody = {
+        state: 'success',
+        description: 'ready to be merged or rebased',
+        target_url: 'https://github.com/probot/semantic-pull-requests',
+        context: 'Semantic Pull Request'
+      }
+
+      const mock = nock('https://api.github.com')
+        .get('/repos/sally/project-x/pulls/123/commits')
+        .reply(200, [
+          ...semanticCommits(),
+          { commit: { message: 'Revert "feat: ride unicorns"' } }
+        ])
+        .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
+        .reply(200)
+        .get('/repos/sally/project-x/contents/.github/semantic.yml')
+        .reply(200, getConfigResponse(`
+          commitsOnly: true
+          scopes:
+            - scope1
+            - scope2
+          allowRevertCommits: true
+          `))
+
+      await handlePullRequestChange(context)
+      expect(mock.isDone()).toBe(true)
+    })
+  })
+
+  describe('when `allowRevertCommits` is set to `false` AND `commitsOnly` is set to `true` in config', () => {
+    test('sets `failure` status if PR has Merge commit', async () => {
+      const context = buildContext()
+      context.payload.pull_request.title = 'fix: bananas'
+      const expectedBody = {
+        state: 'failure',
+        description: 'make sure every commit is semantic',
+        target_url: 'https://github.com/probot/semantic-pull-requests',
+        context: 'Semantic Pull Request'
+      }
+
+      const mock = nock('https://api.github.com')
+        .get('/repos/sally/project-x/pulls/123/commits')
+        .reply(200, [
+          { commit: { message: 'Revert "feat: ride unicorns"' } }
+        ])
+        .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
+        .reply(200)
+        .get('/repos/sally/project-x/contents/.github/semantic.yml')
+        .reply(200, getConfigResponse(`
+          commitsOnly: true
+          allowRevertCommits: false
+          `))
+
+      await handlePullRequestChange(context)
+      expect(mock.isDone()).toBe(true)
+    })
+  })
+
   test('sets `success` status and `ready to be merged or squashed` description if PR has semantic commits but no semantic title', async () => {
     const context = buildContext()
     context.payload.pull_request.title = 'bananas'
