@@ -90,11 +90,12 @@ scopes:
 
 ```yml
 # By default types specified in commitizen/conventional-commit-types is used.
-# See: https://github.com/commitizen/conventional-commit-types/blob/v3.0.0/index.json
+# See: https://github.com/commitizen/conventional-commit-types/blob/v2.3.0/index.json
 # You can override the valid types
 types:
   - feat
   - fix
+  - improvement
   - docs
   - style
   - refactor
