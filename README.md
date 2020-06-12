@@ -17,7 +17,7 @@ information in a way that doesn't make life harder for project contributors,
 especially newcomers who may not know how to amend their git commit history.
 
 By default, only the PR title OR at least one 
-commit messsage needs to have semantic prefix. If you wish to change this 
+commit message needs to have semantic prefix. If you wish to change this 
 behavior, see [configuration](#configuration) section below.
 
 Scenario | Status | Status Check Message
