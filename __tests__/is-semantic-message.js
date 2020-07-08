@@ -12,7 +12,7 @@ describe('isSemanticMessage', () => {
   test('returns false on bad input', () => {
     expect(isSemanticMessage('')).toBe(false)
     expect(isSemanticMessage(null)).toBe(false)
-    expect(isSemanticMessage('non-semantic commit message')).toBe(false)
+    expect(isSemanticMessage('unsemantic commit message')).toBe(false)
   })
 
   test('should check message scope', () => {
