@@ -7,6 +7,7 @@ and [conventional commit messages](https://conventionalcommits.org)? Install thi
 [Probot](https://probot.github.io/) app
 on your repos to ensure your pull requests are semantic before you merge them.
 
+:hand: Wanna check your pull requests using a GitHub Actions workflow instead? See [alternatives](#alternatives) below.
 
 ## How it works
 
@@ -117,6 +118,13 @@ allowMergeCommits: true
 # this is only relevant when using commitsOnly: true (or titleAndCommits: true)
 allowRevertCommits: true
 ```
+
+
+## Alternatives
+
+This project is a GitHub App that you can install on one or many repositories, making it a convenient choice if you want to use it on lots of different repos, or even an entire GitHub organization full of repos.
+
+If, however, you want more control over exactly how and when your pull requests are semantically checked, consider writing your own custom Actions workflow using a GitHub Action like [amannn/action-semantic-pull-request](https://github.com/amannn/action-semantic-pull-request).
 
 ## License
 
