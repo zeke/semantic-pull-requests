@@ -35,7 +35,7 @@ describe('handlePullRequestChange', () => {
   describe('custom scopes', () => {
     test('sets `success` status if PR has semantic title with available scope', async () => {
       const context = buildContext()
-      context.payload.pull_request.title = 'fix(scope1): bananas'
+      context.payload.pull_request.title = 'fix(TASK-1234): bananas'
       const expectedBody = {
         state: 'success',
         description: 'ready to be squashed',
@@ -53,7 +53,7 @@ describe('handlePullRequestChange', () => {
           titleOnly: true
           scopes:
             - scope1
-            - scope2
+            - /^TASK-(\\d)+$/
           `))
 
       await handlePullRequestChange(context)

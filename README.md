@@ -82,10 +82,10 @@ anyCommit: true
 ```
 
 ```yml
-# You can define a list of valid scopes
+# You can define a list of valid scopes and use regular expressions for more dynamic scopes
 scopes:
   - scope1
-  - scope2
+  - /^TASK-(\\d)+$/
   ...
 ```
 
