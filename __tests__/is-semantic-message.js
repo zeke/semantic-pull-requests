@@ -18,6 +18,9 @@ describe('isSemanticMessage', () => {
   test('should check message scope', () => {
     expect(isSemanticMessage('fix(validScope): something', ['validScope'])).toBe(true)
     expect(isSemanticMessage('fix(invalidScope): something', ['validScope'])).toBe(false)
+    expect(isSemanticMessage('fix(validScope,anotherValidScope): something', ['validScope', 'anotherValidScope'])).toBe(true)
+    expect(isSemanticMessage('fix(validScope, spaceAndAnotherValidScope): something', ['validScope', 'spaceAndAnotherValidScope'])).toBe(true)
+    expect(isSemanticMessage('fix(validScope,inValidScope): something', ['validScope'])).toBe(false)
     expect(isSemanticMessage('fix(): something', ['validScope'])).toBe(false)
   })
 
