@@ -1,117 +1,117 @@
-const isScopeValid = require("../lib/is-scope-valid");
+const isScopeValid = require('../lib/is-scope-valid')
 
-const createMockData = (header) => [{ header }];
+const createMockData = (header) => [{ header }]
 
-describe("isScopeValid", () => {
-  test("allows parenthetical scope following the type", () => {
+describe('isScopeValid', () => {
+  test('allows parenthetical scope following the type', () => {
     expect(
-      isScopeValid(createMockData({ scope: "subsystem" }), ["subsystem"])
-    ).toBe(true);
-  });
+      isScopeValid(createMockData({ scope: 'subsystem' }), ['subsystem'])
+    ).toBe(true)
+  })
 
-  test("allows exact match on strings", () => {
+  test('allows exact match on strings', () => {
     expect(
-      isScopeValid(createMockData({ scope: "validScope" }), ["validScope"])
-    ).toBe(true);
-    expect(isScopeValid(createMockData({ scope: "" }), [])).toBe(true);
-    expect(isScopeValid(createMockData({ scope: null }), [])).toBe(true);
-    expect(isScopeValid(createMockData({ scope: undefined }), [])).toBe(true);
+      isScopeValid(createMockData({ scope: 'validScope' }), ['validScope'])
+    ).toBe(true)
+    expect(isScopeValid(createMockData({ scope: '' }), [])).toBe(true)
+    expect(isScopeValid(createMockData({ scope: null }), [])).toBe(true)
+    expect(isScopeValid(createMockData({ scope: undefined }), [])).toBe(true)
     expect(
-      isScopeValid(createMockData({ scope: "allowAllScopes" }), undefined)
-    ).toBe(true);
+      isScopeValid(createMockData({ scope: 'allowAllScopes' }), undefined)
+    ).toBe(true)
     expect(
-      isScopeValid(createMockData({ scope: "allowAllScopes" }), null)
-    ).toBe(true);
-  });
+      isScopeValid(createMockData({ scope: 'allowAllScopes' }), null)
+    ).toBe(true)
+  })
 
-  test("rejects not match and substring matches", () => {
-    expect(isScopeValid(createMockData({ scope: "bad" }), ["validScope"])).toBe(
+  test('rejects not match and substring matches', () => {
+    expect(isScopeValid(createMockData({ scope: 'bad' }), ['validScope'])).toBe(
       false
-    );
+    )
     expect(
-      isScopeValid(createMockData({ scope: "invalidScope" }), ["validScope"])
-    ).toBe(false);
-  });
+      isScopeValid(createMockData({ scope: 'invalidScope' }), ['validScope'])
+    ).toBe(false)
+  })
 
-  test("Validates multiple scope combinations", () => {
-    expect(isScopeValid(createMockData({ scope: "" }), [])).toBe(true);
+  test('Validates multiple scope combinations', () => {
+    expect(isScopeValid(createMockData({ scope: '' }), [])).toBe(true)
 
     expect(
-      isScopeValid(createMockData({ scope: "validScope,anotherValidScope" }), [
-        "validScope",
-        "anotherValidScope",
+      isScopeValid(createMockData({ scope: 'validScope,anotherValidScope' }), [
+        'validScope',
+        'anotherValidScope'
       ])
-    ).toBe(true);
+    ).toBe(true)
 
     expect(
       isScopeValid(
-        createMockData({ scope: "validScope, spaceAndAnotherValidScope" }),
-        ["validScope", "spaceAndAnotherValidScope"]
+        createMockData({ scope: 'validScope, spaceAndAnotherValidScope' }),
+        ['validScope', 'spaceAndAnotherValidScope']
       )
-    ).toBe(true);
+    ).toBe(true)
 
     expect(
-      isScopeValid(createMockData({ scope: "validScope, inValidScope" }), [
-        "validScope",
+      isScopeValid(createMockData({ scope: 'validScope, inValidScope' }), [
+        'validScope'
       ])
-    ).toBe(false);
-  });
+    ).toBe(false)
+  })
 
-  test("Validates regex scopes", () => {
+  test('Validates regex scopes', () => {
     expect(
-      isScopeValid(createMockData({ scope: "partialvalidScope" }), [
-        "/validScope/",
+      isScopeValid(createMockData({ scope: 'partialvalidScope' }), [
+        '/validScope/'
       ])
-    ).toBe(true);
-
-    expect(
-      isScopeValid(createMockData({ scope: "partialvalidScope" }), [
-        "validScope",
-      ])
-    ).toBe(false);
+    ).toBe(true)
 
     expect(
-      isScopeValid(createMockData({ scope: "validScope-1" }), [
-        "validScope-\\d/",
+      isScopeValid(createMockData({ scope: 'partialvalidScope' }), [
+        'validScope'
       ])
-    ).toBe(true);
+    ).toBe(false)
 
     expect(
-      isScopeValid(createMockData({ scope: "validScope-1,validScope-2" }), [
-        "/validScope-\\d/",
+      isScopeValid(createMockData({ scope: 'validScope-1' }), [
+        'validScope-\\d/'
       ])
-    ).toBe(true);
+    ).toBe(true)
 
     expect(
-      isScopeValid(createMockData({ scope: "validScope-10" }), [
-        "/validScope-\\d+/",
+      isScopeValid(createMockData({ scope: 'validScope-1,validScope-2' }), [
+        '/validScope-\\d/'
       ])
-    ).toBe(true);
+    ).toBe(true)
 
     expect(
-      isScopeValid(createMockData({ scope: "validScope-10" }), [
-        "/^validScope-\\d$/",
+      isScopeValid(createMockData({ scope: 'validScope-10' }), [
+        '/validScope-\\d+/'
       ])
-    ).toBe(false);
+    ).toBe(true)
 
     expect(
-      isScopeValid(createMockData({ scope: "TASK-1,TASK-0001,TASK-1234" }), [
-        "/^TASK-(\\d)+$/",
+      isScopeValid(createMockData({ scope: 'validScope-10' }), [
+        '/^validScope-\\d$/'
       ])
-    ).toBe(true);
+    ).toBe(false)
 
     expect(
-      isScopeValid(createMockData({ scope: "TASK-1,TASK-0001,validScope" }), [
-        "/^TASK-(\\d)+$/",
-        "validScope",
+      isScopeValid(createMockData({ scope: 'TASK-1,TASK-0001,TASK-1234' }), [
+        '/^TASK-(\\d)+$/'
       ])
-    ).toBe(true);
+    ).toBe(true)
 
     expect(
-      isScopeValid(createMockData({ scope: "TASK-1,TASK-0001,invalidScope" }), [
-        "/^TASK-(\\d)+$/",
-        "validScope",
+      isScopeValid(createMockData({ scope: 'TASK-1,TASK-0001,validScope' }), [
+        '/^TASK-(\\d)+$/',
+        'validScope'
       ])
-    ).toBe(false);
-  });
-});
+    ).toBe(true)
+
+    expect(
+      isScopeValid(createMockData({ scope: 'TASK-1,TASK-0001,invalidScope' }), [
+        '/^TASK-(\\d)+$/',
+        'validScope'
+      ])
+    ).toBe(false)
+  })
+})
