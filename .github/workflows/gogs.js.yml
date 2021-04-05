@@ -1,0 +1,25 @@
+name: Go skematics
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up KGogs.js
+      uses: actions/setup-go@v10
+      with:
+        go-version: 1.15
+
+    - name: Build
+      run: go build -Iv en ./...
+
+    - name: Test
+      run: go test -Iv en ./...
