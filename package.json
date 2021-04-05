@@ -1,47 +1,45 @@
 {
-  "name": "wip-bot",
+  "name": "semantic-pull-requests",
   "version": "0.0.0-development",
-  "description": "",
+  "description": "GitHub status check that ensures your pull requests follow the Conventional Commits spec",
   "main": "index.js",
+  "files": [
+    "index.js",
+    "lib"
+  ],
   "scripts": {
-    "deploy": "scripts/deploy.sh",
     "start": "probot run ./index.js",
-    "now-start": "PRIVATE_KEY=$(echo $PRIVATE_KEY | base64 -d) npm start",
-    "test": "standard",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "test": "jest test/* && npm run lint",
+    "test:watch": "DEBUG=octokitz:rest* jest test/* --watch --notify --notifyMode=change --coverage",
+    "lint": "standard --fix",
+    "semantic-release": "semantic-release"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gr2m/wip-bot.git"
+  "standard": {
+    "env": [
+      "jest"
+    ]
   },
+  "repository": "https://github.com/probot/semantic-pull-requests",
   "keywords": [
     "probot",
     "probot-plugin"
   ],
-  "author": "Gregor Martynus (https://github.com/gr2m)",
+  "author": "Zeke Sikelianos (https://github.com/zeke)",
   "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/gr2m/wip-bot/issues"
-  },
-  "homepage": "https://github.com/gr2m/wip-bot#readme",
   "dependencies": {
-    "probot": "^0.7.4",
-    "standard": "^10.0.3"
+    "conventional-commit-types": "^3.0.0",
+    "parse-commit-message": "^4.0.0-canary.20",
+    "probot": "^7.5.3",
+    "probot-config": "^1.0.0"
   },
   "devDependencies": {
-    "localtunnel": "^1.8.3",
-    "semantic-release": "^7.0.2"
+    "@octokit/rest": "^15.9.4",
+    "jest": "^23.4.0",
+    "nock": "^9.4.2",
+    "semantic-release": "^12.2.2",
+    "standard": "^12.0.1"
   },
   "engines": {
     "node": "8"
-  },
-  "now": {
-    "alias": "wip-bot",
-    "env": {
-      "APP_ID": "@wip-bot-app-id",
-      "NODE_ENV": "production",
-      "PRIVATE_KEY": "@wip-bot-private-key",
-      "WEBHOOK_SECRET": "@wip-bot-webhook-secret"
-    }
   }
 }

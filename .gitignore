@@ -1,2 +1,5 @@
+.env
+.npmrc
+coverage
 node_modules
 private-key.pem
