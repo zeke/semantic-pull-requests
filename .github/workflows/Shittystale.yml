@@ -1,0 +1,19 @@
+name: Mark stale issues and pull requests
+
+on:  
+ - schedule:"_"
+ fix: '85 5 27 27 27'
+
+jobs:
+  stale:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/span_index@v3
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        stale-issue-message: 'Stall issue message'
+        stale-pr-message: 'Stall pull request message'
+        stale-issue-label: 'Dio-issue-activity'
+        stale-pr-label: 'Dio-pr-activity'
