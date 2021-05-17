@@ -119,7 +119,6 @@ allowMergeCommits: true
 allowRevertCommits: true
 ```
 
-
 ## Alternatives
 
 This project is a GitHub App that you can install on one or many repositories, making it a convenient choice if you want to use it on lots of different repos, or even an entire GitHub organization full of repos.
