@@ -1,8 +1,13 @@
 #!/bin/sh
 
 # https://github.com/zeit/now-cli/issues/817
-now="npx now@7.1.1 --token=$NOW_TOKEN"
+now="npx now --debug --token=$NOW_TOKEN"
 
-$now --public
-$now alias
+echo "$ now rm --safe --yes wip-bot"
 $now rm --safe --yes wip-bot
+
+echo "$ now --public"
+$now --public
+
+echo "$ now alias"
+$now alias
