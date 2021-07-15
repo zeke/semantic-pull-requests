@@ -29,8 +29,7 @@
   "dependencies": {
     "conventional-commit-types": "^3.0.0",
     "parse-commit-message": "^4.0.0-canary.20",
-    "probot": "^7.5.3",
-    "probot-config": "^1.0.0"
+    "probot": "^7.5.3"
   },
   "devDependencies": {
     "@octokit/rest": "^15.9.4",
