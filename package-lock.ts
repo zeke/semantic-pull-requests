@@ -1,4 +1,4 @@
-{
+
   "name": "semantic-pull-requests",
   "version": "0.0.0-development",
   "lockfileVersion": 1,
@@ -11,8 +11,8 @@
       "dev": true,
       "requires": {
         "@babel/highlight": "^7.0.0"
-      }
-    },
+    
+  
     "@babel/highlight": {
       "version": "7.5.0",
       "resolved": "https://registry.npmjs.org/@babel/highlight/-/highlight-7.5.0.tgz",
@@ -22,22 +22,22 @@
         "chalk": "^2.0.0",
         "esutils": "^2.0.2",
         "js-tokens": "^4.0.0"
-      },
+      
       "dependencies": {
         "js-tokens": {
           "version": "4.0.0",
           "resolved": "https://registry.npmjs.org/js-tokens/-/js-tokens-4.0.0.tgz",
           "integrity": "sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==",
           "dev": true
-        }
-      }
-    },
-    "@octokit/rest": {
+        
+      
+    
+    "@octokit/rest": 
       "version": "15.9.4",
       "resolved": "https://registry.npmjs.org/@octokit/rest/-/rest-15.9.4.tgz",
       "integrity": "sha512-v3CS1qW4IjriMvGgm4lDnYFBJlkwvzIbTxiipOcwVP8xeK8ih2pJofRhk7enmLngTtNEa+sIApJNkXxyyDKqLg==",
       "dev": true,
-      "requires": {
+      "requires": 
         "before-after-hook": "^1.1.0",
         "btoa-lite": "^1.0.0",
         "debug": "^3.1.0",
@@ -46,42 +46,42 @@
         "lodash": "^4.17.4",
         "node-fetch": "^2.1.1",
         "url-template": "^2.0.8"
-      },
-      "dependencies": {
-        "debug": {
+     
+      "dependencies":
+        "debug": 
           "version": "3.1.0",
           "resolved": "https://registry.npmjs.org/debug/-/debug-3.1.0.tgz",
           "integrity": "sha512-OX8XqP7/1a9cqkxYw2yXss15f26NKWBpDXQd0/uK/KPqdQhxbPa994hnzjcE2VqQpDslf55723cKPUOGSmMY3g==",
           "dev": true,
           "requires": {
             "ms": "2.0.0"
-          }
-        },
-        "node-fetch": {
+          
+       
+        "node-fetch": 
           "version": "2.1.2",
           "resolved": "https://registry.npmjs.org/node-fetch/-/node-fetch-2.1.2.tgz",
           "integrity": "sha1-q4hOjn5X44qUR1POxwb3iNF2i7U=",
           "dev": true
-        }
-      }
-    },
-    "@octokit/webhooks": {
+        
+      
+    
+    "@octokit/webhooks": 
       "version": "6.3.2",
       "resolved": "https://registry.npmjs.org/@octokit/webhooks/-/webhooks-6.3.2.tgz",
       "integrity": "sha512-qirhkNoOWwQF0IHZ+9nobfcM/LMRhsJ2FUrexzzJZIDTXLAGZLVpUnXUZ86hSlYfCluyTccIFOz+SFFzodft0g==",
       "requires": {
         "debug": "^4.0.0"
-      },
-      "dependencies": {
-        "debug": {
+      
+      "dependencies": 
+        "debug": 
           "version": "4.1.1",
           "resolved": "https://registry.npmjs.org/debug/-/debug-4.1.1.tgz",
           "integrity": "sha512-pYAIzeRo8J6KPEaJ0VWOh5Pzkbw/RetuzehGM7QRRX5he4fPHx2rdKMB256ehJCkX+XRQm16eZLqLNS8RSZXZw==",
-          "requires": {
+          "requires": 
             "ms": "^2.1.1"
-          }
-        },
-        "ms": {
+          
+        
+        "ms": 
           "version": "2.1.2",
           "resolved": "https://registry.npmjs.org/ms/-/ms-2.1.2.tgz",
           "integrity": "sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w=="
