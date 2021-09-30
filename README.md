@@ -60,6 +60,11 @@ behaviors, you can add a `semantic.yml` file to your `.github` directory with
 the following optional settings:
 
 ```yml
+# Disable validation, and skip status check creation
+enabled: false
+```
+
+```yml
 # Always validate the PR title, and ignore the commits
 titleOnly: true
 ```
