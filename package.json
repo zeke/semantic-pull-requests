@@ -19,7 +19,7 @@
       "jest"
     ]
   },
-  "repository": "https://github.com/probot/semantic-pull-requests",
+  "repository": "https://github.com/zeke/semantic-pull-requests",
   "keywords": [
     "probot",
     "probot-plugin"
