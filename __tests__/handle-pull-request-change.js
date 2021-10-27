@@ -646,12 +646,12 @@ describe('handlePullRequestChange', () => {
       expect(mock.isDone()).toBe(true)
     })
 
-    test('sets `failure` status and `PR has only one non-merge commit and it\'s not semantic` description if PR has has only one un-semantic commit', async () => {
+    test('sets `success` status and `ready to be squashed` description if PR has has only one un-semantic commit', async () => {
       const context = buildContext()
       context.payload.pull_request.title = 'fix: I am a semantic PR title but there is only commit unsemantic commit that will not be squashed!'
       const expectedBody = {
-        state: 'failure',
-        description: 'PR has only one non-merge commit and it\'s not semantic; add another commit before squashing',
+        state: 'success',
+        description: 'ready to be squashed',
         target_url: 'https://github.com/probot/semantic-pull-requests',
         context: 'Semantic Pull Request'
       }
