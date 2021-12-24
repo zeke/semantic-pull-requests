@@ -32,30 +32,6 @@ describe('handlePullRequestChange', () => {
     expect(mock.isDone()).toBe(true)
   })
 
-  describe('when `enabled` is set to `false` in config', () => {
-    test('sets `success` status with a skipped message', async () => {
-      const context = buildContext()
-      context.payload.pull_request.title = 'do a thing'
-      const expectedBody = {
-        state: 'success',
-        target_url: 'https://github.com/probot/semantic-pull-requests',
-        description: 'skipped; check disabled in semantic.yml config',
-        context: 'Semantic Pull Request'
-      }
-
-      const mock = nock('https://api.github.com')
-        .get('/repos/sally/project-x/pulls/123/commits')
-        .reply(200, unsemanticCommits())
-        .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
-        .reply(200)
-        .get('/repos/sally/project-x/contents/.github/semantic.yml')
-        .reply(200, getConfigResponse(`enabled: false`))
-
-      await handlePullRequestChange(context)
-      expect(mock.isDone()).toBe(true)
-    })
-  })
-
   describe('custom scopes', () => {
     test('sets `success` status if PR has semantic title with available scope', async () => {
       const context = buildContext()
