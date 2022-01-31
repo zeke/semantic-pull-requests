@@ -8,7 +8,6 @@ def dockerHook = new BuildDocker(
 
 
     images: ["semantic-pr": ["path": ".", "dockerfile": "docker/Dockerfile"]]
-            ]
 )
 
 buildCode([
