@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  semantic_pr:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    volumes:
+      - ./semanticpr:/app/semanticpr
+      - ./semanticpr.private-key.pem:/app/semanticpr.private-key.pem
+    environment:
+      - 'DEBUG=true'
+      - 'SEMANTIC_APP_ID=40145'
+      #- 'PROCESS_INSTALLS_INTERVAL=30'
