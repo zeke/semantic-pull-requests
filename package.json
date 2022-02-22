@@ -40,6 +40,6 @@
     "standard": "^12.0.1"
   },
   "engines": {
-    "node": "17"
+    "node": "18"
   }
 }
