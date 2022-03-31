@@ -130,6 +130,8 @@ This project is a GitHub App that you can install on one or many repositories, m
 
 If, however, you want more control over exactly how and when your pull requests are semantically checked, consider writing your own custom Actions workflow using a GitHub Action like [amannn/action-semantic-pull-request](https://github.com/amannn/action-semantic-pull-request).
 
+See also https://github.com/squash-commit-app/squash-commit-app, a GitHub App which adds an empty commit to an open pull request with a single commit when the title was changed
+
 ## License
 
 [Apache 2.0](LICENSE)
