@@ -36,7 +36,7 @@
     "jest": "^27.5.1",
     "nock": "^13.0.5",
     "semantic-release": "^19.0.2",
-    "smee-client": "^1.0.1",
+    "smee-client": "^1.2.2",
     "standard": "^16.0.4"
   },
   "engines": {
