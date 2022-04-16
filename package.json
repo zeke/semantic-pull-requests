@@ -11,7 +11,8 @@
     "start": "probot run ./index.js",
     "test": "jest test/* && npm run lint",
     "test:watch": "DEBUG=octokitz:rest* jest test/* --watch --notify --notifyMode=change --coverage",
-    "lint": "standard --fix",
+    "lint": "standard",
+    "fix": "standard --fix",
     "semantic-release": "semantic-release"
   },
   "standard": {
