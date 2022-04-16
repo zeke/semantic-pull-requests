@@ -1,6 +1,6 @@
 const handlePullRequestChange = require('../lib/handle-pull-request-change')
 const nock = require('nock')
-const github = require('@octokit/rest')()
+const { Context, ProbotOctokit } = require('probot')
 
 // prevent all network activity to ensure mocks are used
 nock.disableNetConnect()
@@ -25,7 +25,7 @@ describe('handlePullRequestChange', () => {
       .reply(200, unsemanticCommits())
       .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
       .reply(200)
-      .get('/repos/sally/project-x/contents/.github/semantic.yml')
+      .get('/repos/sally/project-x/contents/.github%2Fsemantic.yml')
       .reply(200, getConfigResponse())
 
     await handlePullRequestChange(context)
@@ -47,9 +47,8 @@ describe('handlePullRequestChange', () => {
         .get('/repos/sally/project-x/pulls/123/commits')
         .reply(200, unsemanticCommits())
         .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
-        .reply(200)
-        .get('/repos/sally/project-x/contents/.github/semantic.yml')
-        .reply(200, getConfigResponse(`enabled: false`))
+        .reply(200).get('/repos/sally/project-x/contents/.github%2Fsemantic.yml')
+        .reply(200, getConfigResponse('enabled: false'))
 
       await handlePullRequestChange(context)
       expect(mock.isDone()).toBe(true)
@@ -72,7 +71,7 @@ describe('handlePullRequestChange', () => {
         .reply(200, semanticCommits())
         .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
         .reply(200)
-        .get('/repos/sally/project-x/contents/.github/semantic.yml')
+        .get('/repos/sally/project-x/contents/.github%2Fsemantic.yml')
         .reply(200, getConfigResponse(`
           titleOnly: true
           scopes:
@@ -99,7 +98,7 @@ describe('handlePullRequestChange', () => {
         .reply(200, semanticCommits())
         .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
         .reply(200)
-        .get('/repos/sally/project-x/contents/.github/semantic.yml')
+        .get('/repos/sally/project-x/contents/.github%2Fsemantic.yml')
         .reply(200, getConfigResponse(`
           titleOnly: true
           scopes:
@@ -126,7 +125,7 @@ describe('handlePullRequestChange', () => {
         .reply(200, semanticCommits())
         .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
         .reply(200)
-        .get('/repos/sally/project-x/contents/.github/semantic.yml')
+        .get('/repos/sally/project-x/contents/.github%2Fsemantic.yml')
         .reply(200, getConfigResponse(`
           commitsOnly: true
           scopes:
@@ -154,7 +153,7 @@ describe('handlePullRequestChange', () => {
         .reply(200, semanticCommits())
         .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
         .reply(200)
-        .get('/repos/sally/project-x/contents/.github/semantic.yml')
+        .get('/repos/sally/project-x/contents/.github%2Fsemantic.yml')
         .reply(200, getConfigResponse(`
           titleOnly: true
           scopes:
@@ -184,7 +183,7 @@ describe('handlePullRequestChange', () => {
         .reply(200, unsemanticCommits())
         .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
         .reply(200)
-        .get('/repos/sally/project-x/contents/.github/semantic.yml')
+        .get('/repos/sally/project-x/contents/.github%2Fsemantic.yml')
         .reply(200, getConfigResponse('commitsOnly: true'))
 
       await handlePullRequestChange(context)
@@ -206,7 +205,7 @@ describe('handlePullRequestChange', () => {
         .reply(200, unsemanticCommits())
         .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
         .reply(200)
-        .get('/repos/sally/project-x/contents/.github/semantic.yml')
+        .get('/repos/sally/project-x/contents/.github%2Fsemantic.yml')
         .reply(200, getConfigResponse('commitsOnly: true'))
 
       await handlePullRequestChange(context)
@@ -228,7 +227,7 @@ describe('handlePullRequestChange', () => {
         .reply(200, [...unsemanticCommits(), ...semanticCommits()])
         .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
         .reply(200)
-        .get('/repos/sally/project-x/contents/.github/semantic.yml')
+        .get('/repos/sally/project-x/contents/.github%2Fsemantic.yml')
         .reply(200, getConfigResponse('commitsOnly: true'))
 
       await handlePullRequestChange(context)
@@ -250,7 +249,7 @@ describe('handlePullRequestChange', () => {
         .reply(200, semanticCommits())
         .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
         .reply(200)
-        .get('/repos/sally/project-x/contents/.github/semantic.yml')
+        .get('/repos/sally/project-x/contents/.github%2Fsemantic.yml')
         .reply(200, getConfigResponse('commitsOnly: true'))
 
       await handlePullRequestChange(context)
@@ -274,7 +273,7 @@ describe('handlePullRequestChange', () => {
         .reply(200, unsemanticCommits())
         .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
         .reply(200)
-        .get('/repos/sally/project-x/contents/.github/semantic.yml')
+        .get('/repos/sally/project-x/contents/.github%2Fsemantic.yml')
         .reply(200, getConfigResponse('titleOnly: true'))
 
       await handlePullRequestChange(context)
@@ -296,7 +295,7 @@ describe('handlePullRequestChange', () => {
         .reply(200, semanticCommits())
         .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
         .reply(200)
-        .get('/repos/sally/project-x/contents/.github/semantic.yml')
+        .get('/repos/sally/project-x/contents/.github%2Fsemantic.yml')
         .reply(200, getConfigResponse('titleOnly: true'))
 
       await handlePullRequestChange(context)
@@ -318,7 +317,7 @@ describe('handlePullRequestChange', () => {
         .reply(200, unsemanticCommits())
         .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
         .reply(200)
-        .get('/repos/sally/project-x/contents/.github/semantic.yml')
+        .get('/repos/sally/project-x/contents/.github%2Fsemantic.yml')
         .reply(200, getConfigResponse('titleOnly: true'))
 
       await handlePullRequestChange(context)
@@ -342,7 +341,7 @@ describe('handlePullRequestChange', () => {
         .reply(200, unsemanticCommits())
         .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
         .reply(200)
-        .get('/repos/sally/project-x/contents/.github/semantic.yml')
+        .get('/repos/sally/project-x/contents/.github%2Fsemantic.yml')
         .reply(200, getConfigResponse('titleAndCommits: true'))
 
       await handlePullRequestChange(context)
@@ -364,7 +363,7 @@ describe('handlePullRequestChange', () => {
         .reply(200, semanticCommits())
         .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
         .reply(200)
-        .get('/repos/sally/project-x/contents/.github/semantic.yml')
+        .get('/repos/sally/project-x/contents/.github%2Fsemantic.yml')
         .reply(200, getConfigResponse('titleAndCommits: true'))
 
       await handlePullRequestChange(context)
@@ -386,7 +385,7 @@ describe('handlePullRequestChange', () => {
         .reply(200, unsemanticCommits())
         .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
         .reply(200)
-        .get('/repos/sally/project-x/contents/.github/semantic.yml')
+        .get('/repos/sally/project-x/contents/.github%2Fsemantic.yml')
         .reply(200, getConfigResponse('titleAndCommits: true'))
 
       await handlePullRequestChange(context)
@@ -408,7 +407,7 @@ describe('handlePullRequestChange', () => {
         .reply(200, semanticCommits())
         .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
         .reply(200)
-        .get('/repos/sally/project-x/contents/.github/semantic.yml')
+        .get('/repos/sally/project-x/contents/.github%2Fsemantic.yml')
         .reply(200, getConfigResponse('titleAndCommits: true'))
 
       await handlePullRequestChange(context)
@@ -436,7 +435,7 @@ describe('handlePullRequestChange', () => {
           .reply(200, unsemanticCommits())
           .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
           .reply(200)
-          .get('/repos/sally/project-x/contents/.github/semantic.yml')
+          .get('/repos/sally/project-x/contents/.github%2Fsemantic.yml')
           .reply(200, getConfigResponse(configOption + ': true\nanyCommit: true'))
 
         await handlePullRequestChange(context)
@@ -463,7 +462,7 @@ describe('handlePullRequestChange', () => {
           .reply(200, semanticCommits())
           .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
           .reply(200)
-          .get('/repos/sally/project-x/contents/.github/semantic.yml')
+          .get('/repos/sally/project-x/contents/.github%2Fsemantic.yml')
           .reply(200, getConfigResponse(configOption + ': true\nanyCommit: true'))
 
         await handlePullRequestChange(context)
@@ -490,7 +489,7 @@ describe('handlePullRequestChange', () => {
           .reply(200, [...unsemanticCommits(), ...semanticCommits()])
           .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
           .reply(200)
-          .get('/repos/sally/project-x/contents/.github/semantic.yml')
+          .get('/repos/sally/project-x/contents/.github%2Fsemantic.yml')
           .reply(200, getConfigResponse(configOption + ': true\nanyCommit: true'))
 
         await handlePullRequestChange(context)
@@ -518,7 +517,7 @@ describe('handlePullRequestChange', () => {
         ])
         .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
         .reply(200)
-        .get('/repos/sally/project-x/contents/.github/semantic.yml')
+        .get('/repos/sally/project-x/contents/.github%2Fsemantic.yml')
         .reply(200, getConfigResponse(`
           commitsOnly: true
           scopes:
@@ -550,7 +549,7 @@ describe('handlePullRequestChange', () => {
         ])
         .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
         .reply(200)
-        .get('/repos/sally/project-x/contents/.github/semantic.yml')
+        .get('/repos/sally/project-x/contents/.github%2Fsemantic.yml')
         .reply(200, getConfigResponse(`
           commitsOnly: true
           allowMergeCommits: false
@@ -580,7 +579,7 @@ describe('handlePullRequestChange', () => {
         ])
         .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
         .reply(200)
-        .get('/repos/sally/project-x/contents/.github/semantic.yml')
+        .get('/repos/sally/project-x/contents/.github%2Fsemantic.yml')
         .reply(200, getConfigResponse(`
           commitsOnly: true
           scopes:
@@ -612,7 +611,7 @@ describe('handlePullRequestChange', () => {
         ])
         .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
         .reply(200)
-        .get('/repos/sally/project-x/contents/.github/semantic.yml')
+        .get('/repos/sally/project-x/contents/.github%2Fsemantic.yml')
         .reply(200, getConfigResponse(`
           commitsOnly: true
           allowRevertCommits: false
@@ -639,7 +638,7 @@ describe('handlePullRequestChange', () => {
         .reply(200, semanticCommits())
         .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
         .reply(200)
-        .get('/repos/sally/project-x/contents/.github/semantic.yml')
+        .get('/repos/sally/project-x/contents/.github%2Fsemantic.yml')
         .reply(200, getConfigResponse())
 
       await handlePullRequestChange(context)
@@ -665,7 +664,7 @@ describe('handlePullRequestChange', () => {
         ])
         .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
         .reply(200)
-        .get('/repos/sally/project-x/contents/.github/semantic.yml')
+        .get('/repos/sally/project-x/contents/.github%2Fsemantic.yml')
         .reply(200, getConfigResponse())
 
       await handlePullRequestChange(context)
@@ -688,7 +687,7 @@ describe('handlePullRequestChange', () => {
         .reply(200, unsemanticCommits())
         .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
         .reply(200)
-        .get('/repos/sally/project-x/contents/.github/semantic.yml')
+        .get('/repos/sally/project-x/contents/.github%2Fsemantic.yml')
         .reply(200, getConfigResponse())
 
       await handlePullRequestChange(context)
@@ -711,7 +710,7 @@ describe('handlePullRequestChange', () => {
         .reply(200, unsemanticCommits())
         .post('/repos/sally/project-x/statuses/abcdefg', expectedBody)
         .reply(200)
-        .get('/repos/sally/project-x/contents/.github/semantic.yml')
+        .get('/repos/sally/project-x/contents/.github%2Fsemantic.yml')
         .reply(200, getConfigResponse())
 
       await handlePullRequestChange(context)
@@ -734,32 +733,31 @@ function semanticCommits () {
   ]
 }
 
-function buildContext (overrides) {
-  const defaults = {
-    log: () => { /* no-op */ },
-
-    // an instantiated GitHub client like the one probot provides
-    github: github,
-
-    // context.repo() is a probot convenience function
-    repo: (obj = {}) => {
-      return Object.assign({ owner: 'sally', repo: 'project-x' }, obj)
-    },
-
+function buildContext () {
+  return new Context({
+    id: '5b7aaa10-bd7d-11ec-96ad-da50dfe6c4bc',
+    name: 'pull_request',
     payload: {
+      action: 'created',
+      number: 123,
       pull_request: {
         number: 123,
         title: 'do a thing',
         head: {
           sha: 'abcdefg'
         }
+      },
+      repository: {
+        name: 'project-x',
+        full_name: 'sally/project-x',
+        owner: {
+          login: 'sally'
+        }
       }
     }
-  }
-
-  return Object.assign({}, defaults, overrides)
+  }, new ProbotOctokit(), console)
 }
 
 function getConfigResponse (content = '') {
-  return { content: Buffer.from(content).toString('base64') }
+  return content
 }

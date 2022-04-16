@@ -1,11 +1,11 @@
-module.exports = probotPlugin
-
 const handlePullRequestChange = require('./lib/handle-pull-request-change')
 
-function probotPlugin (robot) {
-  robot.on([
-    'pull_request.opened',
-    'pull_request.edited',
-    'pull_request.synchronize'
-  ], handlePullRequestChange)
+/**
+ * This is the main entrypoint to your Probot app
+ * @param {import('probot').Probot} app
+ */
+module.exports = (app) => {
+  app.on('pull_request.opened', handlePullRequestChange)
+  app.on('pull_request.edited', handlePullRequestChange)
+  app.on('pull_request.synchronize', handlePullRequestChange)
 }

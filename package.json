@@ -27,19 +27,21 @@
   "author": "Zeke Sikelianos (https://github.com/zeke)",
   "license": "Apache-2.0",
   "dependencies": {
+    "@conventional-commits/parser": "^0.4.1",
     "conventional-commit-types": "^3.0.0",
-    "parse-commit-message": "^4.0.0-canary.20",
-    "probot": "^7.5.3",
-    "probot-config": "^1.0.0"
+    "probot": "^12.2.2"
   },
   "devDependencies": {
-    "@octokit/rest": "^15.9.4",
-    "jest": "^23.4.0",
-    "nock": "^9.4.2",
-    "semantic-release": "^12.2.2",
-    "standard": "^12.0.1"
+    "jest": "^26.6.3",
+    "nock": "^13.0.5",
+    "semantic-release": "^19.0.2",
+    "smee-client": "^1.0.1",
+    "standard": "^16.0.4"
   },
   "engines": {
-    "node": "8"
+    "node": ">= 10.13.0"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }

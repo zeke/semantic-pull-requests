@@ -3,3 +3,5 @@
 coverage
 node_modules
 private-key.pem
+.idea/
+
