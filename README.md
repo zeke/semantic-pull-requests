@@ -1,3 +1,21 @@
+# ⚠️ THIS SERVICE IS NO LONGER MAINTAINED ⚠️
+
+I maintained this project and kept the webservice running for several years, but it was often difficult, time-consuming, and generally low on my priority list compared to other things like work and family. The final blow was a [Heroku incident](https://status.heroku.com/incidents/2413) in April 2022 in which all of Heroku's GitHub-related secrets were compromised, and Heroku invalidated existing secrets and disabled support for all GitHub-related integrations.
+
+If you're looking for an alternative way of semantically checking your PRs, see the [Alternatives](#alternatives) section in the README below. GitHub Actions are the way to go!
+
+Thanks for your understanding. I wish you luck on your journey to semantic englightenment.
+
+Love,
+[@zeke](https://github.com/zeke)
+
+---
+---
+---
+---
+---
+
+
 # Semantic Pull Requests
 
 > GitHub status check that ensures your pull requests follow the Conventional Commits spec
