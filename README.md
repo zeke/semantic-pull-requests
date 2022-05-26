@@ -144,7 +144,7 @@ allowRevertCommits: true
 
 ## Alternatives
 
-This project is a GitHub App that you can install on one or many repositories, making it a convenient choice if you want to use it on lots of different repos, or even an entire GitHub organization full of repos.
+This project is a GitHub App that you can install on one or many repositories, making it a convenient choice if you want to use it on lots of different repos, or even an entire GitHub organization full of repos. Now that this GitHub App is no longer available, [Semantic PRs](https://github.com/marketplace/semantic-prs) can be used as a drop-in replacement GitHub App.
 
 If, however, you want more control over exactly how and when your pull requests are semantically checked, consider writing your own custom Actions workflow using a GitHub Action like [amannn/action-semantic-pull-request](https://github.com/amannn/action-semantic-pull-request).
 
