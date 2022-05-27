@@ -1,7 +1,24 @@
 setup
 
+// dockerRunHook = new DockerRun(
+//     steps: this,
+//     name: "deploy",
+//     stageName: "Deploy {stage}",
+//     image: "global-sf1/semantic-pr-ghcr:1.0.0",
+//     registry: "ghcr.io",
+//     registryCredentials: "github-credentials",
+//     commands: []
+// )
+
 dockerImage([
-    aws: [role: "jenkins-devops", account: "873328514756"],
+//     aws: [role: "jenkins-devops", account: "873328514756"],
     images: ["semantic-pr": ["dockerfile": "docker/Dockerfile"]],
-    registry: "873328514756.dkr.ecr.eu-west-1.amazonaws.com"
+    registry: "ghcr.io",
+    imageName: "semantic-pr-ghcr:1.0.0",
+//     hooks: [dockerRunHook],
+    pushImage: true,
+    registryCredentials: "github-credentials",
+
+//     registry: "873328514756.dkr.ecr.eu-west-1.amazonaws.com"
+
 ])
