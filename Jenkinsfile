@@ -14,7 +14,7 @@ dockerImage([
 //     aws: [role: "jenkins-devops", account: "873328514756"],
     images: ["semantic-pr": ["dockerfile": "docker/Dockerfile"]],
     registry: "ghcr.io",
-    imageName: "semantic-pr",
+//     imageName: "semantic-pr",
 //     hooks: [dockerRunHook],
     pushImage: true,
     registryCredentials: "github-credentials",
