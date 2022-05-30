@@ -12,7 +12,7 @@ setup
 
 dockerImage([
     //aws: [role: "jenkins-devops", account: "873328514756"],
-    images: ["semantic-pr": ["dockerfile": "docker/Dockerfile"]],
+    images: ["global-shared/semantic-pull-requests/semantic-pr-test": ["dockerfile": "docker/Dockerfile"]],
     registry: "ghcr.io",
 //     imageName: "semantic-pr",
 //     hooks: [dockerRunHook],
