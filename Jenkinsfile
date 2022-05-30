@@ -17,7 +17,7 @@ dockerImage([
 //     imageName: "semantic-pr",
 //     hooks: [dockerRunHook],
     pushImage: true,
-    registryCredentials: "github-credentials",
+    registryCredentials: "github-registry-credentials",
 
 //     registry: "873328514756.dkr.ecr.eu-west-1.amazonaws.com"
 
