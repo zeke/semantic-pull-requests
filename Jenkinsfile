@@ -16,7 +16,7 @@ dockerImage([
     registry: "ghcr.io",
 //     imageName: "semantic-pr",
 //     hooks: [dockerRunHook],
-    path: "ghcr.io/global-shared/semantic-pull-requests/semantic-pr",
+    path: "ghcr.io/global-shared/semantic-pull-requests/semantic-pr-test",
     pushImage: true,
     registryCredentials: "github-registry-credentials",
 
